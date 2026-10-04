@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>我的 · 每日记账</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app">
+    <main class="main">
+
+      <!-- 用户信息 -->
+      <section class="card" style="display:flex;align-items:center;gap:14px">
+        <div class="header-avatar" style="width:56px;height:56px;font-size:28px;border-radius:18px">👩</div>
+        <div>
+          <div style="font-weight:700;font-size:16px">小确幸</div>
+          <div style="font-size:12px;color:var(--text-sub)">认真生活 · 温暖记账 ✨</div>
+        </div>
+        <a class="btn sm ghost" style="margin-left:auto" href="#" onclick="toast('编辑资料（演示）');return false">编辑资料</a>
+      </section>
+
+      <!-- 分类管理 -->
+      <section class="card">
+        <div class="card-title"><span><span class="dot"></span>分类管理</span><button class="link" onclick="toast('新增分类（演示）')">+ 新增分类</button></div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-sub);margin-bottom:8px">支出分类</div>
+        <div class="cat-grid" id="expCats" style="margin-bottom:6px"></div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-sub);margin:12px 0 8px">收入分类</div>
+        <div class="cat-grid" id="incCats"></div>
+      </section>
+
+      <!-- 预算管理 -->
+      <section class="card">
+        <div class="card-title"><span><span class="dot"></span>本月预算</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--divider)">
+          <span style="font-size:14px">总预算</span>
+          <span style="font-size:14px;color:var(--text-sub);font-variant-numeric:tabular-nums">¥5,000.00</span>
+          <button class="link" onclick="toast('编辑预算（演示）')">编辑</button>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 2px">
+          <span style="font-size:14px">🍜 餐饮预算</span>
+          <span style="font-size:14px;color:var(--text-sub);font-variant-numeric:tabular-nums">¥1,500.00</span>
+          <button class="link" onclick="toast('编辑预算（演示）')">编辑</button>
+        </div>
+      </section>
+
+      <!-- 数据管理 -->
+      <section class="menu-list">
+        <button class="menu-item" onclick="toast('已导出 CSV')"><span class="icon" style="background:#FFE8EE;color:var(--expense)"><span class="material-symbols-outlined" style="font-size:18px">table_view</span></span>导出 CSV<span class="arrow material-symbols-outlined">chevron_right</span></button>
+        <button class="menu-item" onclick="toast('已导出备份')"><span class="icon" style="background:#E6F7EF;color:var(--income)"><span class="material-symbols-outlined" style="font-size:18px">backup</span></span>导出备份<span class="arrow material-symbols-outlined">chevron_right</span></button>
+        <button class="menu-item" onclick="toast('导入备份（演示）')"><span class="icon" style="background:#EAF2FF;color:#5B8DEF"><span class="material-symbols-outlined" style="font-size:18px">upload</span></span>导入备份<span class="arrow material-symbols-outlined">chevron_right</span></button>
+        <button class="menu-item" onclick="toast('回收站（演示）')"><span class="icon" style="background:#FFF4E0;color:#B08A2E"><span class="material-symbols-outlined" style="font-size:18px">delete</span></span>回收站<span class="arrow material-symbols-outlined">chevron_right</span></button>
+      </section>
+
+      <!-- 账户 -->
+      <section class="menu-list">
+        <button class="menu-item" onclick="toast('设置（演示）')"><span class="icon" style="background:var(--primary-faint);color:var(--primary-dark)"><span class="material-symbols-outlined" style="font-size:18px">settings</span></span>设置<span class="arrow material-symbols-outlined">chevron_right</span></button>
+        <a class="menu-item danger" href="login.html"><span class="icon" style="background:#FDE8E8"><span class="material-symbols-outlined" style="font-size:18px">logout</span></span>退出登录</a>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    AppShell.init('profile');
+    var CATS = {
+      expense: [['餐饮','🍜','#8FE0C3'],['交通','🚇','#9FD3E8'],['购物','🛒','#FFB3C1'],['住房','🏠','#FFD98E'],['水电煤','💡','#C9B4E8'],['通讯','📱','#FFA891'],['娱乐','🎮','#FFB3C1'],['医疗','💊','#8FE0C3'],['教育','🎓','#9FD3E8'],['宠物','🐶','#C9B4E8'],['旅行','✈️','#FFA891'],['其他','📦','#FFD98E']],
+      income: [['工资','💰','#8FE0C3'],['奖金','🎁','#FFB3C1'],['理财收益','📈','#9FD3E8'],['红包','🧧','#FFA891'],['其他','📦','#FFD98E']],
+    };
+    function renderCats(elId, list) {
+      var el = document.getElementById(elId);
+      list.forEach(function (c) {
+        var cell = document.createElement('button');
+        cell.className = 'cat-cell';
+        cell.innerHTML = '<span class="cat-cell-icon" style="background:' + c[2] + '">' + c[1] + '</span>' +
+          '<span class="cat-cell-name">' + c[0] + '</span>';
+        cell.addEventListener('click', function () { toast('分类：' + c[0] + '（可编辑/删除）'); });
+        el.appendChild(cell);
+      });
+    }
+    renderCats('expCats', CATS.expense);
+    renderCats('incCats', CATS.income);
+  </script>
+</body>
+</html>

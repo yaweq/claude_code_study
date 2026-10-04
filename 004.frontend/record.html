@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>记一笔 · 每日记账</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app">
+    <main class="main record-layout">
+
+      <!-- 支出 / 收入切换 -->
+      <div style="display:flex;justify-content:center;margin-bottom:16px">
+        <div class="seg" id="typeSeg">
+          <button class="seg-btn active" data-type="expense">支出</button>
+          <button class="seg-btn" data-type="income">收入</button>
+        </div>
+      </div>
+
+      <!-- 金额输入 -->
+      <div class="record-amount">
+        <span class="record-currency">¥</span>
+        <input type="text" inputmode="decimal" class="record-input" id="amountInput" placeholder="0.00" autofocus>
+      </div>
+      <div class="record-quick">
+        <button class="record-chip" data-v="10">10</button>
+        <button class="record-chip" data-v="20">20</button>
+        <button class="record-chip" data-v="50">50</button>
+        <button class="record-chip" data-v="100">100</button>
+      </div>
+
+      <!-- 分类宫格 -->
+      <div class="cat-grid" id="catGrid"></div>
+
+      <!-- 备注 -->
+      <div class="record-fields">
+        <div class="field"><label>日期</label><input type="date" id="dateInput"></div>
+        <div class="field"><label>账户</label>
+          <select id="accountSelect">
+            <option>微信支付</option>
+            <option>支付宝</option>
+            <option>现金</option>
+            <option>银行卡</option>
+          </select>
+        </div>
+        <div class="field"><label>备注</label><input type="text" id="noteInput" placeholder="写点什么…" maxlength="100"></div>
+      </div>
+
+      <button class="btn primary block" id="saveBtn" style="margin-top:4px">
+        <span class="material-symbols-outlined" style="font-size:20px">check_circle</span>完成
+      </button>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    AppShell.initRecord();
+    document.getElementById('dateInput').valueAsDate = new Date();
+
+    var CATEGORIES = {
+      expense: [
+        { name: '餐饮', icon: '🍜', color: '#8FE0C3' }, { name: '交通', icon: '🚇', color: '#9FD3E8' },
+        { name: '购物', icon: '🛒', color: '#FFB3C1' }, { name: '住房', icon: '🏠', color: '#FFD98E' },
+        { name: '水电煤', icon: '💡', color: '#C9B4E8' }, { name: '通讯', icon: '📱', color: '#FFA891' },
+        { name: '娱乐', icon: '🎮', color: '#FFB3C1' }, { name: '医疗', icon: '💊', color: '#8FE0C3' },
+        { name: '教育', icon: '🎓', color: '#9FD3E8' }, { name: '宠物', icon: '🐶', color: '#C9B4E8' },
+        { name: '旅行', icon: '✈️', color: '#FFA891' }, { name: '其他', icon: '📦', color: '#FFD98E' },
+      ],
+      income: [
+        { name: '工资', icon: '💰', color: '#8FE0C3' }, { name: '奖金', icon: '🎁', color: '#FFB3C1' },
+        { name: '理财收益', icon: '📈', color: '#9FD3E8' }, { name: '红包', icon: '🧧', color: '#FFA891' },
+        { name: '其他', icon: '📦', color: '#FFD98E' },
+      ],
+    };
+
+    var currentType = 'expense';
+    var selectedCat = null;
+    // 支持从首页快捷入口带入分类：record.html?cat=餐饮
+    var preset = new URLSearchParams(location.search).get('cat');
+
+    function renderGrid() {
+      var grid = document.getElementById('catGrid');
+      grid.innerHTML = '';
+      CATEGORIES[currentType].forEach(function (c) {
+        if (c.name === preset) selectedCat = c.name;
+        var cell = document.createElement('button');
+        cell.className = 'cat-cell' + (c.name === selectedCat ? ' active' : '');
+        cell.innerHTML = '<span class="cat-cell-icon" style="background:' + c.color + '">' + c.icon + '</span>' +
+          '<span class="cat-cell-name">' + c.name + '</span>';
+        cell.addEventListener('click', function () {
+          selectedCat = c.name;
+          grid.querySelectorAll('.cat-cell').forEach(function (x) { x.classList.remove('active'); });
+          cell.classList.add('active');
+        });
+        grid.appendChild(cell);
+      });
+    }
+    renderGrid();
+
+    // 类型切换
+    document.querySelectorAll('#typeSeg .seg-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        currentType = b.getAttribute('data-type');
+        selectedCat = null; preset = null;
+        document.querySelectorAll('#typeSeg .seg-btn').forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        renderGrid();
+      });
+    });
+
+    // 快捷金额
+    document.querySelectorAll('.record-chip').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        document.getElementById('amountInput').value = chip.getAttribute('data-v');
+        document.getElementById('amountInput').focus();
+      });
+    });
+
+    // 保存
+    document.getElementById('saveBtn').addEventListener('click', function () {
+      var amt = document.getElementById('amountInput').value;
+      if (!amt || parseFloat(amt) <= 0) { toast('请输入有效金额'); return; }
+      if (!selectedCat) { toast('请选择分类'); return; }
+      toast('已记录 ¥' + parseFloat(amt).toFixed(2) + ' · ' + selectedCat);
+      setTimeout(function () { location.href = 'index.html'; }, 900);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>统计 · 每日记账</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app">
+    <main class="main">
+
+      <!-- 时间维度切换 -->
+      <div style="display:flex;justify-content:center">
+        <div class="seg" id="rangeSeg">
+          <button class="seg-btn" data-range="week">周</button>
+          <button class="seg-btn active" data-range="month">月</button>
+          <button class="seg-btn" data-range="year">年</button>
+        </div>
+      </div>
+
+      <!-- 本月总支出 -->
+      <section class="stat-hero">
+        <div class="stat-hero-label">本月总支出 (元)</div>
+        <div class="stat-hero-value">¥3,219.50</div>
+        <div class="stat-hero-note">超棒，省钱啦✨</div>
+        <div class="stat-hero-row">
+          <span>本月总收入 <b>¥7,500.00</b></span>
+          <span>储蓄率达成 <b>¥4,280.50</b></span>
+        </div>
+      </section>
+
+      <!-- 支出分类构成 -->
+      <section class="card">
+        <div class="card-title"><span><span class="dot"></span>支出分类构成</span><span style="font-size:12px;color:var(--text-sub)">共 5 个大类</span></div>
+        <div class="category-rank" id="rankList">
+          <div class="rank-item">
+            <span class="rank-icon" style="background:#8FE0C3">🍜</span>
+            <span class="rank-main">
+              <span class="rank-name">餐饮美食 <span style="color:var(--text-sub);font-weight:400">· 外卖、聚餐与咖啡</span></span>
+              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:100%;background:#8FE0C3"></span></span><span class="rank-amount">¥1,280.00</span></span>
+            </span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-icon" style="background:#FFB3C1">🛒</span>
+            <span class="rank-main">
+              <span class="rank-name">日常购物 <span style="color:var(--text-sub);font-weight:400">· 日用品与秋季服饰</span></span>
+              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:61%;background:#FFB3C1"></span></span><span class="rank-amount">¥780.00</span></span>
+            </span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-icon" style="background:#FFD98E">🏠</span>
+            <span class="rank-main">
+              <span class="rank-name">住房水电 <span style="color:var(--text-sub);font-weight:400">· 水电气网费</span></span>
+              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:41%;background:#FFD98E"></span></span><span class="rank-amount">¥520.00</span></span>
+            </span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-icon" style="background:#C9B4E8">🎮</span>
+            <span class="rank-main">
+              <span class="rank-name">娱乐休闲 <span style="color:var(--text-sub);font-weight:400">· 周末电影、电玩</span></span>
+              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:28%;background:#C9B4E8"></span></span><span class="rank-amount">¥360.00</span></span>
+            </span>
+          </div>
+          <div class="rank-item">
+            <span class="rank-icon" style="background:#9FD3E8">🚇</span>
+            <span class="rank-main">
+              <span class="rank-name">交通出行 <span style="color:var(--text-sub);font-weight:400">· 地铁通勤、打车</span></span>
+              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:22%;background:#9FD3E8"></span></span><span class="rank-amount">¥279.50</span></span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 近6个月趋势 -->
+      <section class="card">
+        <div class="card-title"><span><span class="dot"></span>近6个月收支趋势</span></div>
+        <div class="trend" id="trendChart">
+          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
+            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
+              <div class="trend-bar inc" style="height:82px"></div>
+              <div class="trend-bar exp" style="height:60px"></div>
+            </div>
+            <div class="trend-label">4月</div>
+          </div>
+          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
+            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
+              <div class="trend-bar inc" style="height:90px"></div>
+              <div class="trend-bar exp" style="height:72px"></div>
+            </div>
+            <div class="trend-label">5月</div>
+          </div>
+          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
+            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
+              <div class="trend-bar inc" style="height:95px"></div>
+              <div class="trend-bar exp" style="height:80px"></div>
+            </div>
+            <div class="trend-label">6月</div>
+          </div>
+          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
+            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
+              <div class="trend-bar inc" style="height:100px"></div>
+              <div class="trend-bar exp" style="height:88px"></div>
+            </div>
+            <div class="trend-label">7月</div>
+          </div>
+          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
+            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
+              <div class="trend-bar inc" style="height:108px"></div>
+              <div class="trend-bar exp" style="height:95px"></div>
+            </div>
+            <div class="trend-label">8月</div>
+          </div>
+          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
+            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
+              <div class="trend-bar inc" style="height:115px"></div>
+              <div class="trend-bar exp" style="height:110px"></div>
+            </div>
+            <div class="trend-label">9月</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:16px;justify-content:center;margin-top:10px;font-size:12px;color:var(--text-sub)">
+          <span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--income);margin-right:4px"></i>收入</span>
+          <span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--expense);margin-right:4px"></i>支出</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    AppShell.init('stats');
+    document.querySelectorAll('#rangeSeg .seg-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('#rangeSeg .seg-btn').forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+        toast('切换为：' + b.textContent.trim() + '视图');
+      });
+    });
+  </script>
+</body>
+</html>

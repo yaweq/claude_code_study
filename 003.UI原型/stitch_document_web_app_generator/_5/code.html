@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#fff8f8;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-primary-fixed": "#3e001d", "secondary-container": "#a1f3d5", "primary-container": "#ff7ba9", "error-container": "#ffdad6", "surface-tint": "#a53461", "outline-variant": "#dbc0c6", "on-background": "#22191d", "on-error": "#ffffff", "on-tertiary-fixed-variant": "#5b4304", "surface-variant": "#efdee4", "primary": "#a53461", "background": "#fff8f8", "on-tertiary-fixed": "#261900", "tertiary-fixed": "#ffdea1", "surface-bright": "#fff8f8", "surface-container-highest": "#efdee4", "on-primary-container": "#770b3e", "on-primary": "#ffffff", "primary-fixed-dim": "#ffb1c7", "on-secondary-fixed-variant": "#00513e", "tertiary-container": "#c4a25d", "outline": "#887177", "on-tertiary": "#ffffff", "surface-container-low": "#fff0f5", "inverse-surface": "#382e32", "tertiary": "#755a1c", "on-error-container": "#93000a", "surface": "#fff8f8", "inverse-on-surface": "#feecf3", "surface-container": "#fbe9f0", "on-primary-fixed-variant": "#861a49", "secondary-fixed": "#a1f3d5", "on-surface-variant": "#554147", "on-tertiary-container": "#4e3800", "secondary": "#0d6b54", "surface-container-high": "#f5e4ea", "on-secondary-fixed": "#002117", "error": "#ba1a1a", "on-surface": "#22191d", "inverse-primary": "#ffb1c7", "on-secondary-container": "#18715a", "tertiary-fixed-dim": "#e6c279", "surface-container-lowest": "#ffffff", "on-secondary": "#ffffff", "surface-dim": "#e7d6dc", "primary-fixed": "#ffd9e2", "secondary-fixed-dim": "#85d6ba" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-sm": "0.5rem", "margin": "1rem", "space-xl": "2rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem", "gutter": "1rem" }, fontFamily: { "display-num-mobile": ["Plus Jakarta Sans"], "display-num": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"] }, fontSize: { "display-num-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-num": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-md": ["22px", { lineHeight: "30px", letterSpacing: "-0.01em", fontWeight: "600" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "500" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "600" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_-2px_rgba(247,92,138,0.06)] pt-safe"><div class="h-16 px-margin flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="每日记账 Logo" class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXCPxtRjjmpxsi8zTL3dmXh9QPnIOTTL1w-OSfW-5CCXRh0n4oqBosMxY0eOzttWsS5qUNMMlSKOXFNgyEH_gDEJraSUdZfdjdbt8iuNhr7oW4CctCv9hQKU59jtx-5SqXQpqG3EGhBU_Q1BeoTYOAn1EeYjwN0Pgylp6PtocCBOaTj-YnGyR2mc7UNTPO58qYBo8BT9KIwixPmB3QXEaOjm0qZ6gLuu5y93zcOvEGaLTm0Nfr0MMeLA"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-1"><span class="font-headline-sm text-headline-sm text-primary tracking-tight truncate">每日记账</span><span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-semibold">Transactions</span></div><span class="font-label-sm text-label-sm text-on-surface-variant truncate">早安，小确幸✨</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button class="min-w-[44px] min-h-[44px] px-2.5 py-1.5 rounded-full bg-surface-container-low text-on-surface-variant flex items-center justify-center gap-1 hover:bg-surface-container active:scale-95 transition-all"><span class="material-symbols-outlined text-[18px] text-primary">calendar_today</span><span class="font-label-sm text-label-sm text-on-surface font-medium">本月</span></button><div class="min-w-[44px] min-h-[44px] flex items-center justify-center"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_2px_8px_rgba(165,52,97,0.25)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full">
+<div class="px-margin pt-space-sm space-y-space-md">
+<!-- 顶部月份选择与收支总览卡片 -->
+<div class="w-full bg-surface-container-lowest rounded-lg p-space-md shadow-[0_4px_24px_-4px_rgba(247,92,138,0.08)] flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<button class="flex items-center gap-1.5 py-1 px-3 rounded-full bg-surface-container-low text-on-surface hover:bg-surface-container transition-all active:scale-95" id="monthSelectorBtn">
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">2026年9月</span>
+<span class="material-symbols-outlined text-primary text-[20px]">keyboard_arrow_down</span>
+</button>
+<div class="flex items-center gap-space-xs">
+<button aria-label="搜索" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container active:scale-95 transition-all" id="toggleSearchBtn">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<button aria-label="高级筛选" class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container active:scale-95 transition-all relative" id="filterSheetBtn">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary absolute top-2 right-2"></span>
+</button>
+</div>
+</div>
+<!-- 概要统计小条 -->
+<div class="grid grid-cols-3 gap-space-xs pt-1">
+<div class="bg-surface-container-low rounded-DEFAULT p-2.5 flex flex-col">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm">本月支出</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary tracking-tight mt-1">¥3,219.50</span>
+</div>
+<div class="bg-surface-container-low rounded-DEFAULT p-2.5 flex flex-col">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm">本月收入</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-secondary tracking-tight mt-1">¥7,500.00</span>
+</div>
+<div class="bg-surface-container-low rounded-DEFAULT p-2.5 flex flex-col">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-label-sm text-label-sm">结余</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight mt-1">+¥4,280.50</span>
+</div>
+</div>
+</div>
+<!-- 搜索栏 (常驻或快速检索) -->
+<div class="w-full relative" id="searchContainer">
+<div class="w-full bg-surface-container-lowest rounded-full px-4 py-2 flex items-center gap-2 shadow-[0_2px_12px_rgba(247,92,138,0.04)]">
+<span class="material-symbols-outlined text-outline text-[20px]">search</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-outline-variant outline-none" id="transactionSearchInput" placeholder="搜索备注、商户（如：咖啡、蛋包饭）" type="text"/>
+<button class="hidden text-outline hover:text-on-surface" id="clearSearchBtn">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</div>
+<!-- 筛选胶囊水平滚动条 -->
+<div class="w-full flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="filter-pill flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md transition-all active:scale-95 shadow-sm">
+<span>全部类型</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="filter-pill flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95 shadow-[0_2px_8px_rgba(247,92,138,0.03)]">
+<span>全部分类</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="filter-pill flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95 shadow-[0_2px_8px_rgba(247,92,138,0.03)]">
+<span>账户资产</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<button class="filter-pill flex-shrink-0 flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-lowest text-on-surface-variant font-label-md text-label-md hover:bg-surface-container transition-all active:scale-95 shadow-[0_2px_8px_rgba(247,92,138,0.03)]">
+<span class="material-symbols-outlined text-[14px]">calendar_month</span>
+<span>日期范围</span>
+</button>
+</div>
+<!-- 滑动操作贴心温馨提示小浮条 -->
+<div class="flex items-center justify-between px-3 py-2 rounded-DEFAULT bg-primary-fixed/40 text-on-primary-fixed-variant">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-[18px] text-primary flex-shrink-0">touch_app</span>
+<span class="font-label-sm text-label-sm truncate">左滑账单可快速补写「心情小记」或删除</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold flex-shrink-0 ml-2">知道啦</span>
+</div>
+<!-- 流水列表主区域 -->
+<div class="flex flex-col gap-space-md" id="transactionsList">
+<!-- 分组一：今天 -->
+<section class="flex flex-col gap-2" data-date-group="2026-09-28">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-3.5 rounded-full bg-primary"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">今天 · 09月28日</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span>支出 <span class="font-semibold text-primary">¥114.00</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_-2px_rgba(247,92,138,0.06)] flex flex-col">
+<!-- 单条明细 1 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5 active:opacity-80">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5 active:opacity-80">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">ramen_dining</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">日式蛋包饭</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">餐饮</span>
+<span>12:45</span>
+<span>·</span>
+<span>微信支付</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥38.00</span>
+<span class="font-label-sm text-label-sm text-outline-variant flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px] text-primary-container">favorite</span>午休食堂
+                </span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container ml-16 mr-3"></div>
+<!-- 单条明细 2 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">coffee</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">燕麦拿铁</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">餐饮</span>
+<span>15:30</span>
+<span>·</span>
+<span>支付宝</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥28.00</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">下午茶提神☕</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container ml-16 mr-3"></div>
+<!-- 单条明细 3 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">subway</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">地铁通勤乘车码</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">交通</span>
+<span>08:50</span>
+<span>·</span>
+<span>微信支付</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥6.00</span>
+<span class="font-label-sm text-label-sm text-outline-variant">2号线</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container ml-16 mr-3"></div>
+<!-- 单条明细 4 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim/40 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">shopping_bag</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">全家便利店酸奶水果</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">购物</span>
+<span>19:10</span>
+<span>·</span>
+<span>现金</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥42.00</span>
+<span class="font-label-sm text-label-sm text-outline-variant">晚间补充</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 分组二：昨天 -->
+<section class="flex flex-col gap-2" data-date-group="2026-09-27">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-3.5 rounded-full bg-secondary"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">昨天 · 09月27日</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span>支出 <span class="font-semibold text-primary">¥265.00</span></span>
+<span class="text-outline-variant">|</span>
+<span>收入 <span class="font-semibold text-secondary">¥800.00</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_-2px_rgba(247,92,138,0.06)] flex flex-col">
+<!-- 收入项：季度微奖励 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">featured_seasonal_and_gifts</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">季度微奖励</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-secondary-container/40 text-on-secondary-container font-medium">奖金</span>
+<span>17:00</span>
+<span>·</span>
+<span>工商银行</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-secondary">+¥800.00</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">开心入账 🎉</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container ml-16 mr-3"></div>
+<!-- 支出项：水费电费 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface-variant flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">home</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">水费电费缴费</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">住房</span>
+<span>10:20</span>
+<span>·</span>
+<span>微信支付</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥265.00</span>
+<span class="font-label-sm text-label-sm text-outline-variant">9月账单</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 分组三：09月25日 星期五 -->
+<section class="flex flex-col gap-2" data-date-group="2026-09-25">
+<div class="flex items-center justify-between px-1">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-3.5 rounded-full bg-primary-fixed-dim"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">09月25日 星期五</span>
+</div>
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span>支出 <span class="font-semibold text-primary">¥452.00</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden shadow-[0_4px_20px_-2px_rgba(247,92,138,0.06)] flex flex-col">
+<!-- 娱乐：影院电影票 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed-dim/40 flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">sports_esports</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">影院周末电影票2张</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">娱乐</span>
+<span>20:30</span>
+<span>·</span>
+<span>支付宝</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥98.00</span>
+<span class="font-label-sm text-label-sm text-outline-variant">周末约会</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container ml-16 mr-3"></div>
+<!-- 餐饮：寿喜烧 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">ramen_dining</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">寿喜烧双人聚餐</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">餐饮</span>
+<span>18:30</span>
+<span>·</span>
+<span>微信支付</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥288.00</span>
+<span class="font-label-sm text-label-sm text-primary">满足治愈😋</span>
+</div>
+</div>
+</div>
+<div class="h-[1px] bg-surface-container ml-16 mr-3"></div>
+<!-- 交通：滴滴快车 -->
+<div class="swipe-item relative overflow-hidden group">
+<div class="absolute inset-y-0 right-0 flex items-stretch translate-x-full transition-transform duration-300 ease-out z-10 swipe-actions">
+<button class="px-4 bg-tertiary-fixed text-on-tertiary-fixed flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+<span class="font-label-sm text-label-sm">修改</span>
+</button>
+<button class="px-4 bg-error-container text-on-error-container flex flex-col items-center justify-center gap-0.5">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span class="font-label-sm text-label-sm">删除</span>
+</button>
+</div>
+<div class="swipe-content flex items-center justify-between p-space-sm bg-surface-container-lowest transition-transform duration-300 hover:bg-surface-container-low/40 cursor-pointer">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">local_taxi</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-body-lg text-body-lg text-on-surface font-semibold truncate item-name">滴滴快车回家</span>
+<div class="flex items-center gap-1.5 font-label-sm text-label-sm text-on-surface-variant mt-0.5">
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container font-medium">交通</span>
+<span>22:15</span>
+<span>·</span>
+<span>微信支付</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end flex-shrink-0 ml-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-primary">-¥66.00</span>
+<span class="font-label-sm text-label-sm text-outline-variant">雨天夜行</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 搜索无结果时的空状态 (默认隐藏) -->
+<div class="hidden flex-col items-center justify-center py-10 px-margin text-center" id="searchEmptyState">
+<div class="w-20 h-20 rounded-full bg-surface-container-low flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-[36px] text-outline-variant">sentiment_dissatisfied</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mb-1">未找到相关记账</span>
+<span class="font-body-md text-body-md text-on-surface-variant">试着换一个关键词，比如“咖啡”或“地铁”吧</span>
+</div>
+</div>
+<!-- 底部功能卡片：月度数据小结与数据导出 -->
+<div class="w-full bg-surface-container-low rounded-lg p-space-md flex items-center justify-between shadow-sm mt-space-sm mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">导出本月对账单</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">支持 Excel / CSV 及长图保存</span>
+</div>
+</div>
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary font-label-md text-label-md active:scale-95 transition-all shadow-[0_2px_8px_rgba(165,52,97,0.25)]">
+        立即导出
+      </button>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // 1. 搜索过滤交互
+    const searchInput = document.getElementById('transactionSearchInput');
+    const clearBtn = document.getElementById('clearSearchBtn');
+    const emptyState = document.getElementById('searchEmptyState');
+    const swipeItems = document.querySelectorAll('.swipe-item');
+    const dateGroups = document.querySelectorAll('[data-date-group]');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', function(e) {
+        const val = e.target.value.trim().toLowerCase();
+        if (val.length > 0) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+
+        let totalVisible = 0;
+
+        swipeItems.forEach(item => {
+          const name = item.querySelector('.item-name')?.textContent.toLowerCase() || '';
+          if (val === '' || name.includes(val)) {
+            item.style.display = 'block';
+            totalVisible++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        // 检查各分组是否全部隐藏
+        dateGroups.forEach(group => {
+          const visibleInGroup = group.querySelectorAll('.swipe-item:not([style*="display: none"])');
+          if (visibleInGroup.length === 0) {
+            group.style.display = 'none';
+          } else {
+            group.style.display = 'flex';
+          }
+        });
+
+        if (totalVisible === 0 && val !== '') {
+          emptyState.classList.remove('hidden');
+          emptyState.classList.add('flex');
+        } else {
+          emptyState.classList.add('hidden');
+          emptyState.classList.remove('flex');
+        }
+      });
+
+      clearBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        searchInput.dispatchEvent(new Event('input'));
+        searchInput.focus();
+      });
+    }
+
+    // 2. 简易手势模拟滑动揭示编辑/删除
+    swipeItems.forEach(item => {
+      let startX = 0;
+      let currentX = 0;
+      const content = item.querySelector('.swipe-content');
+      const actions = item.querySelector('.swipe-actions');
+
+      item.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+      }, { passive: true });
+
+      item.addEventListener('touchmove', (e) => {
+        currentX = e.touches[0].clientX;
+        const diffX = currentX - startX;
+        if (diffX < -30) {
+          actions.classList.remove('translate-x-full');
+          content.style.transform = 'translateX(-110px)';
+        } else if (diffX > 20) {
+          actions.classList.add('translate-x-full');
+          content.style.transform = 'translateX(0px)';
+        }
+      }, { passive: true });
+    });
+
+    // 3. 筛选胶囊微交互
+    const filterPills = document.querySelectorAll('.filter-pill');
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', function() {
+        filterPills.forEach(p => {
+          p.classList.remove('bg-primary-fixed', 'text-on-primary-fixed');
+          p.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+        });
+        this.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+        this.classList.add('bg-primary-fixed', 'text-on-primary-fixed');
+      });
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-4px_24px_rgba(247,92,138,0.08)]" data-active-classes="bg-primary-fixed text-primary font-semibold shadow-[0_2px_12px_rgba(255,123,169,0.2)]"><div class="flex justify-between items-center h-20 px-space-sm max-w-lg mx-auto relative"><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 px-2.5 rounded-full text-on-surface-variant hover:text-primary transition-all duration-200" data-path="home" href="#"><span class="material-symbols-outlined text-[22px]">home</span><span class="font-label-sm text-label-sm mt-0.5">首页</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 px-2.5 rounded-full transition-all duration-200 bg-primary-fixed text-primary font-semibold shadow-[0_2px_12px_rgba(255,123,169,0.2)]" data-path="transactions" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-sm text-label-sm mt-0.5">账单</span></a><div class="flex items-center justify-center relative -top-3"><a class="w-14 h-14 rounded-full bg-gradient-to-tr from-primary to-primary-container text-on-primary flex items-center justify-center shadow-[0_8px_20px_-2px_rgba(255,123,169,0.5)] active:scale-95 transition-transform duration-200" data-path="quick-record" href="#"><span class="material-symbols-outlined text-[30px] font-bold">add</span></a></div><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 px-2.5 rounded-full text-on-surface-variant hover:text-primary transition-all duration-200" data-path="statistics" href="#"><span class="material-symbols-outlined text-[22px]">pie_chart</span><span class="font-label-sm text-label-sm mt-0.5">统计</span></a><a class="flex flex-col items-center justify-center min-w-[56px] min-h-[44px] py-1 px-2.5 rounded-full text-on-surface-variant hover:text-primary transition-all duration-200" data-path="profile" href="#"><span class="material-symbols-outlined text-[22px]">face</span><span class="font-label-sm text-label-sm mt-0.5">我的</span></a></div></nav></body></html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>首页 · 每日记账</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div class="app">
+    <main class="main">
+
+      <!-- 本月收支大卡片 -->
+      <section class="hero">
+        <div class="hero-head">
+          <span class="hero-month"><span class="material-symbols-outlined" style="font-size:16px">calendar_month</span><span id="hero-month-label">2026年9月账本</span></span>
+          <button class="hero-eye" id="toggleBalance" aria-label="隐藏/显示金额">
+            <span class="material-symbols-outlined" style="font-size:18px" id="eyeIcon">visibility</span>
+          </button>
+        </div>
+        <div class="hero-balance-label">本月结余 (元)</div>
+        <div class="hero-balance" id="balanceAmount">+¥4,280.50</div>
+        <div class="hero-sub">
+          <div class="hero-sub-item">
+            <span class="hero-sub-icon exp"><span class="material-symbols-outlined" style="font-size:18px">arrow_outward</span></span>
+            <span><span class="hero-sub-label">本月支出</span><br><span class="hero-sub-value exp" id="expenseAmount">¥3,219.50</span></span>
+          </div>
+          <div class="hero-sub-item">
+            <span class="hero-sub-icon inc"><span class="material-symbols-outlined" style="font-size:18px">south_west</span></span>
+            <span><span class="hero-sub-label">本月收入</span><br><span class="hero-sub-value inc" id="incomeAmount">¥7,500.00</span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 预算进度预警条 -->
+      <section class="card" id="budgetCard">
+        <div class="budget-head">
+          <span class="budget-title"><span class="dot"></span>月度总预算<span class="budget-tag" id="budgetTag">¥5,000.00</span></span>
+          <span class="budget-tip"><span class="material-symbols-outlined" style="font-size:14px">tips_and_updates</span>今日建议可用 ¥89.00</span>
+        </div>
+        <div class="budget-track">
+          <div class="budget-fill" id="budgetFill" style="width:64.4%"></div>
+          <div class="budget-mark" style="left:80%"><span>80%预警</span></div>
+        </div>
+        <div class="budget-foot">
+          <span>已用 <strong class="used" id="budgetUsed">64.4% (¥3,219.50)</strong></span>
+          <span>剩余可用 <strong class="left" id="budgetLeft">¥1,780.50</strong></span>
+        </div>
+        <div class="budget-empty" id="budgetEmpty" style="display:none">
+          <span class="budget-empty-icon"><span class="material-symbols-outlined" style="font-size:20px">tune</span></span>
+          <span class="budget-empty-text"><b>设定9月支出预算上限</b><span>随时查看超支预警，掌握生活节奏</span></span>
+          <a class="btn primary sm" href="profile.html">立即设定</a>
+        </div>
+      </section>
+
+      <!-- 快捷记账入口 -->
+      <section>
+        <div class="quick-head"><span class="title">快捷记账</span><span class="sub">一键轻记 ✨</span></div>
+        <div class="quick-grid">
+          <a class="quick-item" href="record.html?cat=餐饮"><span class="quick-badge" style="background:#8FE0C3">🍜</span><span class="quick-label">餐饮</span></a>
+          <a class="quick-item" href="record.html?cat=交通"><span class="quick-badge" style="background:#9FD3E8">🚇</span><span class="quick-label">交通</span></a>
+          <a class="quick-item" href="record.html?cat=购物"><span class="quick-badge" style="background:#FFB3C1">🛒</span><span class="quick-label">购物</span></a>
+          <a class="quick-item" href="record.html?cat=娱乐"><span class="quick-badge" style="background:#FFD98E">🎮</span><span class="quick-label">娱乐</span></a>
+          <a class="quick-item" href="record.html?cat=旅行"><span class="quick-badge" style="background:#FFA891">✈️</span><span class="quick-label">旅行</span></a>
+        </div>
+      </section>
+
+      <!-- 今日明细 -->
+      <section id="todaySection">
+        <div class="txn-group">
+          <span class="day">今日明细<span class="date" id="todayDate">9月28日 星期一</span></span>
+          <span class="sum exp">支出 ¥114.00</span>
+        </div>
+        <div class="txn-list">
+          <div class="txn-item">
+            <span class="txn-icon" style="background:#8FE0C3">🍜</span>
+            <span class="txn-main"><span class="txn-name">餐饮 · 午餐日式蛋包饭</span><span class="txn-meta">12:45<span class="sep"></span>微信支付</span></span>
+            <span class="txn-amount exp">-¥38.00</span>
+          </div>
+          <div class="txn-item">
+            <span class="txn-icon" style="background:#8FE0C3">☕</span>
+            <span class="txn-main"><span class="txn-name">餐饮 · 燕麦拿铁下午茶</span><span class="txn-meta">15:30<span class="sep"></span>支付宝</span></span>
+            <span class="txn-amount exp">-¥28.00</span>
+          </div>
+          <div class="txn-item">
+            <span class="txn-icon" style="background:#9FD3E8">🚇</span>
+            <span class="txn-main"><span class="txn-name">交通 · 地铁通勤乘车码</span><span class="txn-meta">08:50<span class="sep"></span>微信支付</span></span>
+            <span class="txn-amount exp">-¥6.00</span>
+          </div>
+          <div class="txn-item">
+            <span class="txn-icon" style="background:#FFB3C1">🛒</span>
+            <span class="txn-main"><span class="txn-name">购物 · 便利店小零食水果</span><span class="txn-meta">19:10<span class="sep"></span>现金</span></span>
+            <span class="txn-amount exp">-¥42.00</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 昨日明细 -->
+      <section id="yesterdaySection">
+        <div class="txn-group">
+          <span class="day">昨天<span class="date">9月27日 星期日</span></span>
+          <span class="sum exp">支 ¥265.00 / <span style="color:var(--income)">收 ¥800.00</span></span>
+        </div>
+        <div class="txn-list">
+          <div class="txn-item">
+            <span class="txn-icon" style="background:#E6F7EF">🎁</span>
+            <span class="txn-main"><span class="txn-name">奖金 · 季度项目微奖励</span><span class="txn-meta">17:00<span class="sep"></span>银行卡</span></span>
+            <span class="txn-amount inc">+¥800.00</span>
+          </div>
+          <div class="txn-item">
+            <span class="txn-icon" style="background:#FFD98E">🏠</span>
+            <span class="txn-main"><span class="txn-name">住房 · 水电燃气均摊</span><span class="txn-meta">10:20<span class="sep"></span>微信支付</span></span>
+            <span class="txn-amount exp">-¥265.00</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 空态（无数据时显示） -->
+      <section class="empty" id="emptyState" style="display:none">
+        <div class="empty-icon">📝</div>
+        <div class="empty-title">还没有任何记账记录呢</div>
+        <div class="empty-desc">生活里每一次认真花钱，都值得被温柔记录。只需3秒，记录今天第一笔开销吧～</div>
+        <a class="btn primary" href="record.html"><span class="material-symbols-outlined" style="font-size:20px">edit_note</span>记第一笔账 ⚡</a>
+        <div class="hint"><span>✓ 自动统计分析</span><span>✓ 预算超支提醒</span></div>
+      </section>
+
+      <!-- 底部引语 -->
+      <div style="text-align:center;padding:8px 0"><span style="font-size:11px;color:var(--text-muted)">“ 认真生活的每一步，都值得被温柔记录 ”</span></div>
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script>
+    AppShell.init('home');
+    document.getElementById('hero-month-label').textContent =
+      new Date().getFullYear() + '年' + (new Date().getMonth() + 1) + '月账本';
+
+    // 三种状态演示：默认有数据，#empty 空态，#over 超支
+    var state = location.hash.replace('#', '');
+    var today = new Date();
+    var weekdays = ['日', '一', '二', '三', '四', '五', '六'];
+    document.getElementById('todayDate').textContent =
+      (today.getMonth() + 1) + '月' + today.getDate() + '日 星期' + weekdays[today.getDay()];
+
+    if (state === 'empty') {
+      document.getElementById('balanceAmount').textContent = '¥0.00';
+      document.getElementById('expenseAmount').textContent = '¥0.00';
+      document.getElementById('incomeAmount').textContent = '¥0.00';
+      document.getElementById('budgetFill').style.width = '0%';
+      document.getElementById('budgetUsed').textContent = '0% (¥0.00)';
+      document.getElementById('budgetLeft').textContent = '¥0.00';
+      document.getElementById('budgetTag').textContent = '未设定';
+      document.getElementById('todaySection').style.display = 'none';
+      document.getElementById('yesterdaySection').style.display = 'none';
+      document.getElementById('emptyState').style.display = 'flex';
+    } else if (state === 'over') {
+      // 超支告警状态
+      document.getElementById('balanceAmount').textContent = '+¥2,074.00';
+      document.getElementById('budgetFill').style.width = '106%';
+      document.getElementById('budgetFill').classList.add('danger');
+      document.getElementById('budgetUsed').textContent = '106% (¥5,306.50)';
+      document.getElementById('budgetLeft').textContent = '已超支 ¥306.50';
+      document.getElementById('budgetLeft').style.color = 'var(--danger)';
+      document.getElementById('budgetTag').textContent = '已超支';
+      document.getElementById('budgetTag').style.background = '#FDE8E8';
+      document.getElementById('budgetTag').style.color = 'var(--danger)';
+    }
+
+    // 金额显隐切换
+    (function () {
+      var isHidden = false;
+      var balance = document.getElementById('balanceAmount').textContent;
+      var expense = document.getElementById('expenseAmount').textContent;
+      var income = document.getElementById('incomeAmount').textContent;
+      document.getElementById('toggleBalance').addEventListener('click', function () {
+        isHidden = !isHidden;
+        document.getElementById('eyeIcon').textContent = isHidden ? 'visibility_off' : 'visibility';
+        document.getElementById('balanceAmount').textContent = isHidden ? '****' : balance;
+        document.getElementById('expenseAmount').textContent = isHidden ? '****' : expense;
+        document.getElementById('incomeAmount').textContent = isHidden ? '****' : income;
+      });
+    })();
+  </script>
+</body>
+</html>

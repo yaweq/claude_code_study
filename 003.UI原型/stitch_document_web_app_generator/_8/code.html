@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base { html, body { width: 100%; margin: 0; padding: 0; } body { overscroll-behavior-y: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-secondary-fixed-variant": "#00513e", "surface-container-low": "#fff0f5", "tertiary-fixed": "#ffdea1", "on-secondary": "#ffffff", "error-container": "#ffdad6", "tertiary-fixed-dim": "#e6c279", "on-error-container": "#93000a", "on-secondary-fixed": "#002117", "inverse-on-surface": "#feecf3", "primary-container": "#ff7ba9", "on-primary": "#ffffff", "on-tertiary": "#ffffff", "surface-dim": "#e7d6dc", "on-primary-fixed-variant": "#861a49", "inverse-surface": "#382e32", "primary-fixed-dim": "#ffb1c7", "secondary-fixed": "#a1f3d5", "secondary-container": "#a1f3d5", "primary": "#a53461", "surface-container-lowest": "#ffffff", "background": "#fff8f8", "surface-container": "#fbe9f0", "surface-variant": "#efdee4", "on-tertiary-fixed": "#261900", "on-error": "#ffffff", "on-background": "#22191d", "on-secondary-container": "#18715a", "secondary": "#0d6b54", "surface": "#fff8f8", "surface-container-highest": "#efdee4", "on-surface-variant": "#554147", "tertiary-container": "#c4a25d", "inverse-primary": "#ffb1c7", "surface-container-high": "#f5e4ea", "outline": "#887177", "on-tertiary-fixed-variant": "#5b4304", "error": "#ba1a1a", "on-primary-fixed": "#3e001d", "on-surface": "#22191d", "surface-bright": "#fff8f8", "secondary-fixed-dim": "#85d6ba", "surface-tint": "#a53461", "outline-variant": "#dbc0c6", "primary-fixed": "#ffd9e2", "tertiary": "#755a1c", "on-primary-container": "#770b3e", "on-tertiary-container": "#4e3800" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-md": "1rem", "space-xs": "0.25rem", "space-xl": "2rem", "gutter": "1rem", "space-sm": "0.5rem", "margin": "1rem", "space-lg": "1.5rem" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "display-num-mobile": ["Plus Jakarta Sans"], "display-num": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["22px", { lineHeight: "30px", letterSpacing: "-0.01em", fontWeight: "600" }], "label-sm": ["11px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }], "label-md": ["13px", { lineHeight: "18px", letterSpacing: "0.01em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }], "body-lg": ["16px", { lineHeight: "24px", fontWeight: "500" }], "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }], "display-num-mobile": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }], "display-num": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.02)]"><div class="h-16 px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><button aria-label="Go back" class="w-11 h-11 -ml-space-xs rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="history.back()" type="button"><span class="material-symbols-outlined text-[24px]">arrow_back</span></button><img alt="Brand logo. - Primary color: #ff7ba9
+- Font: plusJakartaSans
+- Mode: light
+- Roundness: rounded-full
+" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W0Ck9cxc26IsYx3h-upR2eqowXSh58veMSS9fg_L7SjRQUrLMBZqha5-6HvqYoLyF_sAxWyaPTv8b5ER4d3gU8UCjvIpBCLQTOiLsKf9SAMJCehD-2-SM_Ar9keTahFKSzs_oe_bwS6wzsgZ0zstHs3hwpmw6KhpMB7Zx3_YPq3Rn6zEzOjUEWfOWomfa9k_HzLro4ms6J-WJFeP0jQpr53DzrMgUC1DzxaLdOzIM2caMS_3CWayI95j3M"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">每日记账</span></div><div class="flex items-center gap-space-sm"><span class="font-label-md text-label-md text-on-surface-variant font-medium">Login</span><button aria-label="Switch language" class="w-11 h-11 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors" type="button"><span class="material-symbols-outlined text-[20px]">language</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-safe bg-surface"><div class="flex flex-col w-full px-margin pb-space-xl">
+<!-- Top Context Header Bar (In-page Micro Nav) -->
+<div class="flex items-center justify-between py-space-sm mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center justify-center w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">新用户加入</span>
+</div>
+<a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold hover:opacity-80 transition-opacity" href="#">
+<span>已有账号？去登录</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<!-- Warm Brand Welcome Block -->
+<section class="flex flex-col items-center text-center my-space-md">
+<div class="relative mb-space-sm">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center shadow-sm overflow-hidden p-2">
+<img alt="每日记账应用图标" class="w-full h-full object-contain rounded-full" src="https://lh3.googleusercontent.com/aida/AEtjO1W0Ck9cxc26IsYx3h-upR2eqowXSh58veMSS9fg_L7SjRQUrLMBZqha5-6HvqYoLyF_sAxWyaPTv8b5ER4d3gU8UCjvIpBCLQTOiLsKf9SAMJCehD-2-SM_Ar9keTahFKSzs_oe_bwS6wzsgZ0zstHs3hwpmw6KhpMB7Zx3_YPq3Rn6zEzOjUEWfOWomfa9k_HzLro4ms6J-WJFeP0jQpr53DzrMgUC1DzxaLdOzIM2caMS_3CWayI95j3M"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</div>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mb-space-xs">
+      开启你的温暖记账之旅 ✨
+    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[280px]">
+      只需 10 秒，轻松开启柔软清晰的财务生活
+    </p>
+</section>
+<!-- Interactive Registration Card -->
+<div class="bg-surface-container-lowest rounded-lg p-space-lg shadow-sm flex flex-col gap-space-md mb-space-lg">
+<!-- Phone Input Block -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant font-medium">手机号码</label>
+<div class="flex items-center bg-surface-container-low rounded-DEFAULT px-space-md py-space-sm gap-space-sm focus-within:bg-surface-container transition-colors">
+<button class="flex items-center gap-0.5 text-on-surface font-label-md text-label-md font-semibold select-none pr-space-xs" type="button">
+<span>+86</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">arrow_drop_down</span>
+</button>
+<span class="h-4 w-px bg-outline-variant/60"></span>
+<input class="bg-transparent border-0 outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline-variant" id="phone-input" inputmode="numeric" maxlength="11" placeholder="请输入常用手机号" type="tel"/>
+<button class="hidden text-outline-variant hover:text-on-surface-variant p-0.5" id="clear-phone" type="button">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+</button>
+</div>
+</div>
+<!-- SMS Code Input Block -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-md text-label-md text-on-surface-variant font-medium">短信验证码</label>
+<div class="flex items-center justify-between bg-surface-container-low rounded-DEFAULT px-space-md py-space-sm gap-space-sm focus-within:bg-surface-container transition-colors">
+<div class="flex items-center gap-space-sm flex-1 min-w-0">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">sms</span>
+<input class="bg-transparent border-0 outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline-variant tracking-wider" id="code-input" maxlength="6" placeholder="6 位数字" type="number"/>
+</div>
+<button class="shrink-0 px-space-md py-1.5 rounded-full bg-surface-container text-primary font-label-md text-label-md font-semibold hover:bg-primary-fixed transition-colors active:scale-95 disabled:opacity-50 disabled:pointer-events-none" id="btn-send-code" type="button">
+          获取验证码
+        </button>
+</div>
+</div>
+<!-- Password Input Block -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface-variant font-medium">设置登录密码</label>
+<span class="font-label-sm text-label-sm text-outline-variant">8-20位字符，含字母和数字</span>
+</div>
+<div class="flex items-center bg-surface-container-low rounded-DEFAULT px-space-md py-space-sm gap-space-sm focus-within:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">lock</span>
+<input class="bg-transparent border-0 outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline-variant" id="password-input" placeholder="请设定专属密码" type="password"/>
+<button class="text-outline-variant hover:text-on-surface-variant p-0.5" id="toggle-password" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+<!-- Password Strength Indicator Dots -->
+<div class="flex items-center gap-1.5 px-space-xs pt-1">
+<div class="text-label-sm font-label-sm text-on-surface-variant">安全强度:</div>
+<div class="flex items-center gap-1 flex-1">
+<span class="h-1.5 flex-1 rounded-full bg-surface-container transition-colors" id="strength-1"></span>
+<span class="h-1.5 flex-1 rounded-full bg-surface-container transition-colors" id="strength-2"></span>
+<span class="h-1.5 flex-1 rounded-full bg-surface-container transition-colors" id="strength-3"></span>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant" id="strength-text">等待输入</span>
+</div>
+</div>
+<!-- Optional Invite Code Accordion -->
+<div class="flex flex-col">
+<button class="flex items-center justify-between py-1 text-on-surface-variant hover:text-on-surface transition-colors" id="toggle-optional-btn" type="button">
+<span class="font-label-md text-label-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-tertiary">card_giftcard</span>
+          填写好友邀请码 / 个性昵称 (选填)
+        </span>
+<span class="material-symbols-outlined text-[18px] text-outline transition-transform duration-200" id="accordion-arrow">expand_more</span>
+</button>
+<div class="hidden flex-col gap-space-sm pt-space-sm" id="optional-container">
+<div class="bg-surface-container-low rounded-DEFAULT px-space-md py-space-sm flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">face</span>
+<input class="bg-transparent border-0 outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline-variant" placeholder="自定义你的记账小昵称 (例如: 麦麦)" type="text"/>
+</div>
+<div class="bg-surface-container-low rounded-DEFAULT px-space-md py-space-sm flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-outline-variant text-[20px]">loyalty</span>
+<input class="bg-transparent border-0 outline-none w-full font-body-md text-body-md text-on-surface placeholder:text-outline-variant uppercase" placeholder="输入6位邀请码立领粉嫩信纸" type="text"/>
+</div>
+</div>
+</div>
+<!-- Primary Action Button -->
+<div class="pt-space-xs">
+<button class="w-full h-12 rounded-full bg-primary-container text-on-primary font-body-lg text-body-lg font-semibold flex items-center justify-center gap-space-xs shadow-md active:scale-98 transition-all hover:opacity-95" id="submit-register-btn" type="button">
+<span>立即注册并登录</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<!-- Agreement Checkbox -->
+<div class="flex items-start gap-space-xs px-space-xs pt-1">
+<button class="mt-0.5 w-4 h-4 rounded-full bg-surface-container flex items-center justify-center shrink-0 transition-colors" id="agreement-checkbox" type="button">
+<span class="material-symbols-outlined text-on-primary text-[14px] hidden" id="checkbox-icon">check</span>
+</button>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-relaxed select-none">
+        我已阅读并完全同意 
+        <a class="text-primary hover:underline" href="#">《用户服务协议》</a> 
+        与 
+        <a class="text-primary hover:underline" href="#">《隐私保护政策》</a>，授权创建每日记账个人数据中心。
+      </p>
+</div>
+</div>
+<!-- New User Perks Showcase Banner -->
+<section class="bg-surface-container-low rounded-lg p-space-md shadow-sm mb-space-lg">
+<div class="flex items-center gap-space-xs mb-space-sm">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-on-tertiary-fixed text-[14px]">award_star</span>
+</div>
+<h2 class="font-label-md text-label-md text-on-surface font-bold">新用户专属注册礼遇</h2>
+</div>
+<div class="grid grid-cols-3 gap-space-xs">
+<!-- Perk 1 -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-sm flex flex-col items-center text-center">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center mb-1 text-primary">
+<span class="material-symbols-outlined text-[18px]">palette</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">专属马卡龙</span>
+<span class="text-[10px] text-on-surface-variant leading-tight scale-90">免费限定主题</span>
+</div>
+<!-- Perk 2 -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-sm flex flex-col items-center text-center">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center mb-1 text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">notifications_active</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">超支柔和提醒</span>
+<span class="text-[10px] text-on-surface-variant leading-tight scale-90">温柔预算呵护</span>
+</div>
+<!-- Perk 3 -->
+<div class="bg-surface-container-lowest rounded-DEFAULT p-space-sm flex flex-col items-center text-center">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center mb-1 text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-[18px]">cloud_sync</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">双端实时云备</span>
+<span class="text-[10px] text-on-surface-variant leading-tight scale-90">财务足迹不丢</span>
+</div>
+</div>
+</section>
+<!-- Friendly Bottom Navigation Helper -->
+<div class="flex flex-col items-center justify-center gap-space-xs text-center">
+<a class="inline-flex items-center gap-1 font-body-md text-body-md text-primary font-medium hover:opacity-80 transition-opacity" href="#">
+<span>已有账号？马上登录</span>
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</a>
+<span class="font-label-sm text-label-sm text-outline-variant">每日记账 · 陪你记录生活中的每一点确幸</span>
+</div>
+</div>
+<script>
+  (function() {
+    // 1. Phone input clear button toggle
+    const phoneInput = document.getElementById('phone-input');
+    const clearPhoneBtn = document.getElementById('clear-phone');
+    if (phoneInput && clearPhoneBtn) {
+      phoneInput.addEventListener('input', function() {
+        if (this.value.length > 0) {
+          clearPhoneBtn.classList.remove('hidden');
+        } else {
+          clearPhoneBtn.classList.add('hidden');
+        }
+      });
+      clearPhoneBtn.addEventListener('click', function() {
+        phoneInput.value = '';
+        clearPhoneBtn.classList.add('hidden');
+        phoneInput.focus();
+      });
+    }
+
+    // 2. Countdown code button
+    const btnSendCode = document.getElementById('btn-send-code');
+    let timer = null;
+    if (btnSendCode) {
+      btnSendCode.addEventListener('click', function() {
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        if (phone.length < 11) {
+          alert('请先输入正确的 11 位手机号码哦 🌸');
+          return;
+        }
+        let countdown = 60;
+        btnSendCode.disabled = true;
+        btnSendCode.innerText = countdown + 's 后重发';
+        
+        timer = setInterval(function() {
+          countdown--;
+          if (countdown > 0) {
+            btnSendCode.innerText = countdown + 's 后重发';
+          } else {
+            clearInterval(timer);
+            btnSendCode.disabled = false;
+            btnSendCode.innerText = '获取验证码';
+          }
+        }, 1000);
+      });
+    }
+
+    // 3. Password visibility toggle
+    const passwordInput = document.getElementById('password-input');
+    const togglePasswordBtn = document.getElementById('toggle-password');
+    if (passwordInput && togglePasswordBtn) {
+      togglePasswordBtn.addEventListener('click', function() {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        const icon = togglePasswordBtn.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.textContent = isPassword ? 'visibility' : 'visibility_off';
+        }
+      });
+    }
+
+    // 4. Password Strength Meter
+    const s1 = document.getElementById('strength-1');
+    const s2 = document.getElementById('strength-2');
+    const s3 = document.getElementById('strength-3');
+    const sText = document.getElementById('strength-text');
+    if (passwordInput && s1 && s2 && s3 && sText) {
+      passwordInput.addEventListener('input', function() {
+        const val = this.value;
+        let score = 0;
+        if (val.length >= 6) score++;
+        if (/[A-Za-z]/.test(val) && /\d/.test(val)) score++;
+        if (val.length >= 10 && /[^A-Za-z0-9]/.test(val)) score++;
+
+        // Reset
+        s1.className = 'h-1.5 flex-1 rounded-full bg-surface-container transition-colors';
+        s2.className = 'h-1.5 flex-1 rounded-full bg-surface-container transition-colors';
+        s3.className = 'h-1.5 flex-1 rounded-full bg-surface-container transition-colors';
+
+        if (val.length === 0) {
+          sText.textContent = '等待输入';
+        } else if (score <= 1) {
+          s1.className = 'h-1.5 flex-1 rounded-full bg-primary-container transition-colors';
+          sText.textContent = '简单';
+        } else if (score === 2) {
+          s1.className = 'h-1.5 flex-1 rounded-full bg-tertiary-fixed-dim transition-colors';
+          s2.className = 'h-1.5 flex-1 rounded-full bg-tertiary-fixed-dim transition-colors';
+          sText.textContent = '良好';
+        } else {
+          s1.className = 'h-1.5 flex-1 rounded-full bg-secondary transition-colors';
+          s2.className = 'h-1.5 flex-1 rounded-full bg-secondary transition-colors';
+          s3.className = 'h-1.5 flex-1 rounded-full bg-secondary transition-colors';
+          sText.textContent = '安全';
+        }
+      });
+    }
+
+    // 5. Accordion for optional fields
+    const toggleOptBtn = document.getElementById('toggle-optional-btn');
+    const optContainer = document.getElementById('optional-container');
+    const arrow = document.getElementById('accordion-arrow');
+    if (toggleOptBtn && optContainer && arrow) {
+      toggleOptBtn.addEventListener('click', function() {
+        const isHidden = optContainer.classList.contains('hidden');
+        if (isHidden) {
+          optContainer.classList.remove('hidden');
+          optContainer.classList.add('flex');
+          arrow.style.transform = 'rotate(180deg)';
+        } else {
+          optContainer.classList.add('hidden');
+          optContainer.classList.remove('flex');
+          arrow.style.transform = 'rotate(0deg)';
+        }
+      });
+    }
+
+    // 6. Agreement Checkbox toggle
+    const agreementCheckbox = document.getElementById('agreement-checkbox');
+    const checkboxIcon = document.getElementById('checkbox-icon');
+    let isAgreed = false;
+    if (agreementCheckbox && checkboxIcon) {
+      agreementCheckbox.addEventListener('click', function() {
+        isAgreed = !isAgreed;
+        if (isAgreed) {
+          agreementCheckbox.classList.remove('bg-surface-container');
+          agreementCheckbox.classList.add('bg-primary');
+          checkboxIcon.classList.remove('hidden');
+        } else {
+          agreementCheckbox.classList.add('bg-surface-container');
+          agreementCheckbox.classList.remove('bg-primary');
+          checkboxIcon.classList.add('hidden');
+        }
+      });
+    }
+
+    // 7. Submit verification
+    const submitBtn = document.getElementById('submit-register-btn');
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function() {
+        if (!isAgreed) {
+          alert('请先勾选并阅读《用户服务协议》与《隐私政策》~ ✨');
+          return;
+        }
+        const phone = phoneInput ? phoneInput.value.trim() : '';
+        const pwd = passwordInput ? passwordInput.value.trim() : '';
+        if (phone.length < 11 || pwd.length < 6) {
+          alert('请完善您的手机号码和密码信息哦');
+          return;
+        }
+        submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">progress_activity</span> 注册中...';
+        setTimeout(function() {
+          alert('欢迎加入每日记账大家庭！开始记录美好生活吧 🧁');
+          submitBtn.innerHTML = '<span>立即注册并登录</span><span class="material-symbols-outlined text-[20px]">arrow_forward</span>';
+        }, 1200);
+      });
+    }
+  })();
+</script></main></body></html>
