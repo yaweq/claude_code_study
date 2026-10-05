@@ -14,11 +14,11 @@
   <div class="app">
     <main class="main">
 
-      <!-- 本月摘要 -->
+      <!-- 本月摘要（数值由后端 /api/summary 填充，加载失败保留演示值） -->
       <section class="card" style="display:flex;justify-content:space-around;text-align:center;padding:18px 12px">
-        <div><div style="font-size:12px;color:var(--text-sub)">本月支出</div><div class="exp" style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums">¥3,219.50</div></div>
-        <div><div style="font-size:12px;color:var(--text-sub)">本月收入</div><div class="inc" style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums">¥7,500.00</div></div>
-        <div><div style="font-size:12px;color:var(--text-sub)">结余</div><div style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums">+¥4,280.50</div></div>
+        <div><div style="font-size:12px;color:var(--text-sub)">本月支出</div><div class="exp" id="sumExpense" style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums">¥3,219.50</div></div>
+        <div><div style="font-size:12px;color:var(--text-sub)">本月收入</div><div class="inc" id="sumIncome" style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums">¥7,500.00</div></div>
+        <div><div style="font-size:12px;color:var(--text-sub)">结余</div><div id="sumBalance" style="font-size:18px;font-weight:700;font-variant-numeric:tabular-nums">+¥4,280.50</div></div>
       </section>
 
       <!-- 筛选栏 -->
@@ -31,55 +31,46 @@
         </div>
       </div>
 
-      <!-- 今天 -->
-      <section>
-        <div class="txn-group"><span class="day">今天<span class="date">09月28日</span></span><span class="sum exp">支出 ¥114.00</span></div>
-        <div class="txn-list">
-          <div class="txn-item">
-            <span class="txn-icon" style="background:#8FE0C3">🍜</span>
-            <span class="txn-main"><span class="txn-name">日式蛋包饭</span><span class="txn-meta">餐饮<span class="sep"></span>微信支付</span></span>
-            <span class="txn-amount exp">-¥38.00</span>
-            <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
+      <!-- 账目列表容器：后端数据渲染到这里；加载失败则保留下方演示内容 -->
+      <div id="txnList">
+        <!-- 今天（演示兜底） -->
+        <section>
+          <div class="txn-group"><span class="day">今天<span class="date">09月28日</span></span><span class="sum exp">支出 ¥114.00</span></div>
+          <div class="txn-list">
+            <div class="txn-item">
+              <span class="txn-icon" style="background:#8FE0C3">🍜</span>
+              <span class="txn-main"><span class="txn-name">日式蛋包饭</span><span class="txn-meta">餐饮<span class="sep"></span>微信支付</span></span>
+              <span class="txn-amount exp">-¥38.00</span>
+              <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
+            </div>
+            <div class="txn-item">
+              <span class="txn-icon" style="background:#8FE0C3">☕</span>
+              <span class="txn-main"><span class="txn-name">燕麦拿铁</span><span class="txn-meta">餐饮<span class="sep"></span>支付宝</span></span>
+              <span class="txn-amount exp">-¥28.00</span>
+              <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
+            </div>
+            <div class="txn-item">
+              <span class="txn-icon" style="background:#9FD3E8">🚇</span>
+              <span class="txn-main"><span class="txn-name">地铁通勤乘车码</span><span class="txn-meta">交通<span class="sep"></span>微信支付</span></span>
+              <span class="txn-amount exp">-¥6.00</span>
+              <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
+            </div>
           </div>
-          <div class="txn-item">
-            <span class="txn-icon" style="background:#8FE0C3">☕</span>
-            <span class="txn-main"><span class="txn-name">燕麦拿铁</span><span class="txn-meta">餐饮<span class="sep"></span>支付宝</span></span>
-            <span class="txn-amount exp">-¥28.00</span>
-            <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
-          </div>
-          <div class="txn-item">
-            <span class="txn-icon" style="background:#9FD3E8">🚇</span>
-            <span class="txn-main"><span class="txn-name">地铁通勤乘车码</span><span class="txn-meta">交通<span class="sep"></span>微信支付</span></span>
-            <span class="txn-amount exp">-¥6.00</span>
-            <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
-          </div>
-          <div class="txn-item">
-            <span class="txn-icon" style="background:#FFB3C1">🛒</span>
-            <span class="txn-main"><span class="txn-name">便利店小零食水果</span><span class="txn-meta">购物<span class="sep"></span>现金</span></span>
-            <span class="txn-amount exp">-¥42.00</span>
-            <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- 昨天 -->
-      <section>
-        <div class="txn-group"><span class="day">昨天<span class="date">09月27日</span></span><span class="sum" style="color:var(--text-sub)">支 ¥265.00 / 收 ¥800.00</span></div>
-        <div class="txn-list">
-          <div class="txn-item">
-            <span class="txn-icon" style="background:#E6F7EF">🎁</span>
-            <span class="txn-main"><span class="txn-name">季度项目微奖励</span><span class="txn-meta">奖金<span class="sep"></span>银行卡</span></span>
-            <span class="txn-amount inc">+¥800.00</span>
-            <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
+        <!-- 昨天（演示兜底） -->
+        <section>
+          <div class="txn-group"><span class="day">昨天<span class="date">09月27日</span></span><span class="sum" style="color:var(--text-sub)">支 ¥265.00 / 收 ¥800.00</span></div>
+          <div class="txn-list">
+            <div class="txn-item">
+              <span class="txn-icon" style="background:#E6F7EF">🎁</span>
+              <span class="txn-main"><span class="txn-name">季度项目微奖励</span><span class="txn-meta">奖金<span class="sep"></span>银行卡</span></span>
+              <span class="txn-amount inc">+¥800.00</span>
+              <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
+            </div>
           </div>
-          <div class="txn-item">
-            <span class="txn-icon" style="background:#FFD98E">🏠</span>
-            <span class="txn-main"><span class="txn-name">水电燃气均摊</span><span class="txn-meta">住房<span class="sep"></span>微信支付</span></span>
-            <span class="txn-amount exp">-¥265.00</span>
-            <span class="txn-actions"><button class="txn-action" title="修改"><span class="material-symbols-outlined" style="font-size:15px">edit</span></button><button class="txn-action" title="删除"><span class="material-symbols-outlined" style="font-size:15px">delete</span></button></span>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <!-- 左滑提示 -->
       <div style="text-align:center;font-size:11px;color:var(--text-muted)">左滑账单可快速补写「心情小记」或删除</div>
@@ -89,6 +80,7 @@
   <script src="js/app.js"></script>
   <script>
     AppShell.init('bills');
+
     // 筛选 chips 交互（原型演示）
     document.querySelectorAll('.filter-chip').forEach(function (chip) {
       chip.addEventListener('click', function () {
@@ -97,12 +89,100 @@
         toast('筛选：' + chip.textContent.trim());
       });
     });
-    // 修改/删除
-    document.querySelectorAll('.txn-action').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        toast(btn.title === '修改' ? '进入编辑' : '已删除（演示）');
+
+    /* =========================================================
+     * 从后端 API 读取真实交易数据并渲染
+     * 失败（未启动后端 / file:// 打开）时保留上方演示内容
+     * ========================================================= */
+    var PALETTE = ['#FFB3C1', '#FFD98E', '#8FE0C3', '#C9B4E8', '#9FD3E8', '#FFA891'];
+
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    // 分 -> ¥字符串
+    function fmt(cents) {
+      var n = Math.abs(cents) / 100;
+      return '¥' + n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function localToday() {
+      var d = new Date();
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+    }
+    function localMonth() {
+      var d = new Date();
+      return d.getFullYear() + '-' + pad(d.getMonth() + 1);
+    }
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function md(dateStr) {
+      var p = dateStr.slice(5).split('-');
+      return parseInt(p[0], 10) + '月' + parseInt(p[1], 10) + '日';
+    }
+    function dayLabel(dateStr) {
+      var t = localToday();
+      if (dateStr === t) return '今天';
+      var y = new Date(t + 'T00:00:00');
+      y.setDate(y.getDate() - 1);
+      if (dateStr === y.getFullYear() + '-' + pad(y.getMonth() + 1) + '-' + pad(y.getDate())) return '昨天';
+      return md(dateStr);
+    }
+
+    function renderTxns(rows) {
+      var container = document.getElementById('txnList');
+      if (!rows.length) {
+        container.innerHTML = '<div style="text-align:center;padding:40px 0;color:var(--text-muted)">本月还没有记录，去记一笔吧</div>';
+        return;
+      }
+      var groups = {};
+      rows.forEach(function (t) { (groups[t.date] = groups[t.date] || []).push(t); });
+      var html = '';
+      Object.keys(groups).sort().reverse().forEach(function (date) {
+        var items = groups[date];
+        var exp = 0, inc = 0;
+        items.forEach(function (t) { if (t.type === 'expense') exp += t.amount_cents; else inc += t.amount_cents; });
+        var sumText = '';
+        if (exp && inc) sumText = '支 ' + fmt(exp) + ' / 收 ' + fmt(inc);
+        else if (exp) sumText = '支出 ' + fmt(exp);
+        else sumText = '收入 ' + fmt(inc);
+        html += '<section><div class="txn-group"><span class="day">' + dayLabel(date) +
+          '<span class="date">' + md(date) + '</span></span><span class="sum ' + (exp ? 'exp' : 'inc') + '">' + sumText + '</span></div><div class="txn-list">';
+        items.forEach(function (t) {
+          var bg = PALETTE[(t.category_id - 1) % PALETTE.length];
+          var name = t.note || t.category_name;
+          var cls = t.type === 'expense' ? 'exp' : 'inc';
+          var sign = t.type === 'expense' ? '-' : '+';
+          html += '<div class="txn-item">' +
+            '<span class="txn-icon" style="background:' + bg + '">' + esc(t.category_icon || '📦') + '</span>' +
+            '<span class="txn-main"><span class="txn-name">' + esc(name) + '</span>' +
+            '<span class="txn-meta">' + esc(t.category_name) + '<span class="sep"></span>' + esc(t.account) + '</span></span>' +
+            '<span class="txn-amount ' + cls + '">' + sign + fmt(t.amount_cents) + '</span>' +
+            '</div>';
+        });
+        html += '</div></section>';
       });
-    });
+      container.innerHTML = html;
+    }
+
+    function loadData() {
+      var month = localMonth();
+      return Promise.all([
+        fetch('/api/summary?month=' + month).then(function (r) { return r.json(); }),
+        fetch('/api/transactions').then(function (r) { return r.json(); })
+      ]).then(function (res) {
+        var summary = res[0], txs = res[1];
+        if (summary.error) throw new Error(summary.error);
+        document.getElementById('sumExpense').textContent = fmt(summary.expense);
+        document.getElementById('sumIncome').textContent = fmt(summary.income);
+        var bal = document.getElementById('sumBalance');
+        bal.textContent = (summary.balance >= 0 ? '+' : '') + fmt(summary.balance);
+        renderTxns(txs);
+      }).catch(function () {
+        toast('未连接到后端，展示演示数据');
+      });
+    }
+
+    loadData();
   </script>
 </body>
 </html>

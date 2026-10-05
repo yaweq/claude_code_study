@@ -14,7 +14,7 @@
   <div class="app">
     <main class="main">
 
-      <!-- 时间维度切换 -->
+      <!-- 时间维度切换（当前按「月」加载，其余为演示） -->
       <div style="display:flex;justify-content:center">
         <div class="seg" id="rangeSeg">
           <button class="seg-btn" data-range="week">周</button>
@@ -26,103 +26,24 @@
       <!-- 本月总支出 -->
       <section class="stat-hero">
         <div class="stat-hero-label">本月总支出 (元)</div>
-        <div class="stat-hero-value">¥3,219.50</div>
-        <div class="stat-hero-note">超棒，省钱啦✨</div>
+        <div class="stat-hero-value" id="heroExpense">¥3,219.50</div>
+        <div class="stat-hero-note" id="heroNote">超棒，省钱啦✨</div>
         <div class="stat-hero-row">
-          <span>本月总收入 <b>¥7,500.00</b></span>
-          <span>储蓄率达成 <b>¥4,280.50</b></span>
+          <span>本月总收入 <b id="heroIncome">¥7,500.00</b></span>
+          <span>结余 <b id="heroBalance">¥4,280.50</b></span>
         </div>
       </section>
 
       <!-- 支出分类构成 -->
       <section class="card">
-        <div class="card-title"><span><span class="dot"></span>支出分类构成</span><span style="font-size:12px;color:var(--text-sub)">共 5 个大类</span></div>
-        <div class="category-rank" id="rankList">
-          <div class="rank-item">
-            <span class="rank-icon" style="background:#8FE0C3">🍜</span>
-            <span class="rank-main">
-              <span class="rank-name">餐饮美食 <span style="color:var(--text-sub);font-weight:400">· 外卖、聚餐与咖啡</span></span>
-              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:100%;background:#8FE0C3"></span></span><span class="rank-amount">¥1,280.00</span></span>
-            </span>
-          </div>
-          <div class="rank-item">
-            <span class="rank-icon" style="background:#FFB3C1">🛒</span>
-            <span class="rank-main">
-              <span class="rank-name">日常购物 <span style="color:var(--text-sub);font-weight:400">· 日用品与秋季服饰</span></span>
-              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:61%;background:#FFB3C1"></span></span><span class="rank-amount">¥780.00</span></span>
-            </span>
-          </div>
-          <div class="rank-item">
-            <span class="rank-icon" style="background:#FFD98E">🏠</span>
-            <span class="rank-main">
-              <span class="rank-name">住房水电 <span style="color:var(--text-sub);font-weight:400">· 水电气网费</span></span>
-              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:41%;background:#FFD98E"></span></span><span class="rank-amount">¥520.00</span></span>
-            </span>
-          </div>
-          <div class="rank-item">
-            <span class="rank-icon" style="background:#C9B4E8">🎮</span>
-            <span class="rank-main">
-              <span class="rank-name">娱乐休闲 <span style="color:var(--text-sub);font-weight:400">· 周末电影、电玩</span></span>
-              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:28%;background:#C9B4E8"></span></span><span class="rank-amount">¥360.00</span></span>
-            </span>
-          </div>
-          <div class="rank-item">
-            <span class="rank-icon" style="background:#9FD3E8">🚇</span>
-            <span class="rank-main">
-              <span class="rank-name">交通出行 <span style="color:var(--text-sub);font-weight:400">· 地铁通勤、打车</span></span>
-              <span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:22%;background:#9FD3E8"></span></span><span class="rank-amount">¥279.50</span></span>
-            </span>
-          </div>
-        </div>
+        <div class="card-title"><span><span class="dot"></span>支出分类构成</span><span style="font-size:12px;color:var(--text-sub)" id="rankCount"></span></div>
+        <div class="category-rank" id="rankList"></div>
       </section>
 
       <!-- 近6个月趋势 -->
       <section class="card">
         <div class="card-title"><span><span class="dot"></span>近6个月收支趋势</span></div>
-        <div class="trend" id="trendChart">
-          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
-            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
-              <div class="trend-bar inc" style="height:82px"></div>
-              <div class="trend-bar exp" style="height:60px"></div>
-            </div>
-            <div class="trend-label">4月</div>
-          </div>
-          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
-            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
-              <div class="trend-bar inc" style="height:90px"></div>
-              <div class="trend-bar exp" style="height:72px"></div>
-            </div>
-            <div class="trend-label">5月</div>
-          </div>
-          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
-            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
-              <div class="trend-bar inc" style="height:95px"></div>
-              <div class="trend-bar exp" style="height:80px"></div>
-            </div>
-            <div class="trend-label">6月</div>
-          </div>
-          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
-            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
-              <div class="trend-bar inc" style="height:100px"></div>
-              <div class="trend-bar exp" style="height:88px"></div>
-            </div>
-            <div class="trend-label">7月</div>
-          </div>
-          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
-            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
-              <div class="trend-bar inc" style="height:108px"></div>
-              <div class="trend-bar exp" style="height:95px"></div>
-            </div>
-            <div class="trend-label">8月</div>
-          </div>
-          <div class="trend-col" style="align-items:center;flex-direction:column;justify-content:flex-end">
-            <div style="display:flex;gap:4px;align-items:flex-end;height:150px">
-              <div class="trend-bar inc" style="height:115px"></div>
-              <div class="trend-bar exp" style="height:110px"></div>
-            </div>
-            <div class="trend-label">9月</div>
-          </div>
-        </div>
+        <div class="trend" id="trendChart"></div>
         <div style="display:flex;gap:16px;justify-content:center;margin-top:10px;font-size:12px;color:var(--text-sub)">
           <span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--income);margin-right:4px"></i>收入</span>
           <span><i style="display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--expense);margin-right:4px"></i>支出</span>
@@ -134,13 +55,97 @@
   <script src="js/app.js"></script>
   <script>
     AppShell.init('stats');
+
+    var PALETTE = ['#FFB3C1', '#FFD98E', '#8FE0C3', '#C9B4E8', '#9FD3E8', '#FFA891'];
+
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function fmt(cents) {
+      var n = Math.abs(cents) / 100;
+      return '¥' + n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    function localMonth() {
+      var d = new Date();
+      return d.getFullYear() + '-' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1);
+    }
+
+    /* 时间维度切换（当前仅「月」加载真实数据） */
     document.querySelectorAll('#rangeSeg .seg-btn').forEach(function (b) {
       b.addEventListener('click', function () {
         document.querySelectorAll('#rangeSeg .seg-btn').forEach(function (x) { x.classList.remove('active'); });
         b.classList.add('active');
-        toast('切换为：' + b.textContent.trim() + '视图');
+        if (b.getAttribute('data-range') !== 'month') toast('当前演示为「月」视图');
       });
     });
+
+    function renderSummary(s) {
+      document.getElementById('heroExpense').textContent = fmt(s.expense);
+      document.getElementById('heroIncome').textContent = fmt(s.income);
+      document.getElementById('heroBalance').textContent = (s.balance >= 0 ? '+' : '') + fmt(s.balance);
+      document.getElementById('heroNote').textContent = s.balance >= 0 ? '超棒，省钱啦✨' : '本月已超支，注意控制哦💡';
+    }
+
+    function renderBreakdown(rows) {
+      var list = document.getElementById('rankList');
+      document.getElementById('rankCount').textContent = rows.length ? ('共 ' + rows.length + ' 个大类') : '';
+      if (!rows.length) {
+        list.innerHTML = '<div style="text-align:center;padding:20px 0;color:var(--text-muted)">本月暂无支出记录</div>';
+        return;
+      }
+      var max = rows[0].total_cents || 1;
+      var html = '';
+      rows.forEach(function (r, i) {
+        var bg = PALETTE[i % PALETTE.length];
+        var pct = Math.max(4, Math.round(r.total_cents / max * 100));
+        html += '<div class="rank-item">' +
+          '<span class="rank-icon" style="background:' + bg + '">' + esc(r.icon || '📦') + '</span>' +
+          '<span class="rank-main">' +
+          '<span class="rank-name">' + esc(r.name) + '</span>' +
+          '<span class="rank-bar-wrap"><span class="rank-bar"><span class="rank-bar-fill" style="width:' + pct + '%;background:' + bg + '"></span></span>' +
+          '<span class="rank-amount">' + fmt(r.total_cents) + '</span></span>' +
+          '</span></div>';
+      });
+      list.innerHTML = html;
+    }
+
+    function renderTrend(rows) {
+      var box = document.getElementById('trendChart');
+      if (!rows.length) { box.innerHTML = '<div style="color:var(--text-muted);text-align:center;padding:20px 0">暂无趋势数据</div>'; return; }
+      var max = 1;
+      rows.forEach(function (r) { max = Math.max(max, r.income, r.expense); });
+      var html = '';
+      rows.forEach(function (r) {
+        var hInc = Math.round(r.income / max * 140);
+        var hExp = Math.round(r.expense / max * 140);
+        html += '<div class="trend-col">' +
+          '<div style="display:flex;gap:4px;align-items:flex-end;height:150px">' +
+          '<div class="trend-bar inc" style="height:' + hInc + 'px"></div>' +
+          '<div class="trend-bar exp" style="height:' + hExp + 'px"></div>' +
+          '</div><div class="trend-label">' + parseInt(r.month.slice(5), 10) + '月</div></div>';
+      });
+      box.innerHTML = html;
+    }
+
+    function load() {
+      var month = localMonth();
+      Promise.all([
+        fetch('/api/summary?month=' + month).then(function (r) { return r.json(); }),
+        fetch('/api/breakdown?month=' + month + '&type=expense').then(function (r) { return r.json(); }),
+        fetch('/api/trend?months=6').then(function (r) { return r.json(); })
+      ]).then(function (res) {
+        if (res[0].error) throw new Error(res[0].error);
+        renderSummary(res[0]);
+        renderBreakdown(res[1]);
+        renderTrend(res[2]);
+      }).catch(function () {
+        toast('未连接到后端，展示演示数据');
+      });
+    }
+
+    load();
   </script>
 </body>
 </html>

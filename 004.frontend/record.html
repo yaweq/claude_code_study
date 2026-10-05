@@ -34,7 +34,7 @@
         <button class="record-chip" data-v="100">100</button>
       </div>
 
-      <!-- 分类宫格 -->
+      <!-- 分类宫格（从后端 /api/categories 加载） -->
       <div class="cat-grid" id="catGrid"></div>
 
       <!-- 备注 -->
@@ -42,9 +42,9 @@
         <div class="field"><label>日期</label><input type="date" id="dateInput"></div>
         <div class="field"><label>账户</label>
           <select id="accountSelect">
-            <option>微信支付</option>
-            <option>支付宝</option>
             <option>现金</option>
+            <option>微信</option>
+            <option>支付宝</option>
             <option>银行卡</option>
           </select>
         </div>
@@ -62,51 +62,51 @@
     AppShell.initRecord();
     document.getElementById('dateInput').valueAsDate = new Date();
 
-    var CATEGORIES = {
-      expense: [
-        { name: '餐饮', icon: '🍜', color: '#8FE0C3' }, { name: '交通', icon: '🚇', color: '#9FD3E8' },
-        { name: '购物', icon: '🛒', color: '#FFB3C1' }, { name: '住房', icon: '🏠', color: '#FFD98E' },
-        { name: '水电煤', icon: '💡', color: '#C9B4E8' }, { name: '通讯', icon: '📱', color: '#FFA891' },
-        { name: '娱乐', icon: '🎮', color: '#FFB3C1' }, { name: '医疗', icon: '💊', color: '#8FE0C3' },
-        { name: '教育', icon: '🎓', color: '#9FD3E8' }, { name: '宠物', icon: '🐶', color: '#C9B4E8' },
-        { name: '旅行', icon: '✈️', color: '#FFA891' }, { name: '其他', icon: '📦', color: '#FFD98E' },
-      ],
-      income: [
-        { name: '工资', icon: '💰', color: '#8FE0C3' }, { name: '奖金', icon: '🎁', color: '#FFB3C1' },
-        { name: '理财收益', icon: '📈', color: '#9FD3E8' }, { name: '红包', icon: '🧧', color: '#FFA891' },
-        { name: '其他', icon: '📦', color: '#FFD98E' },
-      ],
-    };
-
+    var PALETTE = ['#FFB3C1', '#FFD98E', '#8FE0C3', '#C9B4E8', '#9FD3E8', '#FFA891'];
+    var categories = { expense: [], income: [] };
     var currentType = 'expense';
-    var selectedCat = null;
-    // 支持从首页快捷入口带入分类：record.html?cat=餐饮
-    var preset = new URLSearchParams(location.search).get('cat');
+    var selectedCatId = null;
+    var preset = new URLSearchParams(location.search).get('cat'); // record.html?cat=餐饮
+
+    function localToday() {
+      var d = new Date();
+      return d.getFullYear() + '-' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1) + '-' + (d.getDate() < 10 ? '0' + d.getDate() : d.getDate());
+    }
 
     function renderGrid() {
       var grid = document.getElementById('catGrid');
       grid.innerHTML = '';
-      CATEGORIES[currentType].forEach(function (c) {
-        if (c.name === preset) selectedCat = c.name;
+      categories[currentType].forEach(function (c, i) {
+        if (preset && c.name === preset) selectedCatId = c.id;
         var cell = document.createElement('button');
-        cell.className = 'cat-cell' + (c.name === selectedCat ? ' active' : '');
-        cell.innerHTML = '<span class="cat-cell-icon" style="background:' + c.color + '">' + c.icon + '</span>' +
+        cell.className = 'cat-cell' + (c.id === selectedCatId ? ' active' : '');
+        var bg = PALETTE[i % PALETTE.length];
+        cell.innerHTML = '<span class="cat-cell-icon" style="background:' + bg + '">' + c.icon + '</span>' +
           '<span class="cat-cell-name">' + c.name + '</span>';
         cell.addEventListener('click', function () {
-          selectedCat = c.name;
+          selectedCatId = c.id;
+          preset = null;
           grid.querySelectorAll('.cat-cell').forEach(function (x) { x.classList.remove('active'); });
           cell.classList.add('active');
         });
         grid.appendChild(cell);
       });
     }
-    renderGrid();
+
+    // 从后端加载分类
+    fetch('/api/categories')
+      .then(function (r) { return r.json(); })
+      .then(function (list) {
+        list.forEach(function (c) { categories[c.type].push(c); });
+        renderGrid();
+      })
+      .catch(function () { toast('未连接到后端'); });
 
     // 类型切换
     document.querySelectorAll('#typeSeg .seg-btn').forEach(function (b) {
       b.addEventListener('click', function () {
         currentType = b.getAttribute('data-type');
-        selectedCat = null; preset = null;
+        selectedCatId = null; preset = null;
         document.querySelectorAll('#typeSeg .seg-btn').forEach(function (x) { x.classList.remove('active'); });
         b.classList.add('active');
         renderGrid();
@@ -121,13 +121,33 @@
       });
     });
 
-    // 保存
+    // 保存（POST 写库）
     document.getElementById('saveBtn').addEventListener('click', function () {
-      var amt = document.getElementById('amountInput').value;
-      if (!amt || parseFloat(amt) <= 0) { toast('请输入有效金额'); return; }
-      if (!selectedCat) { toast('请选择分类'); return; }
-      toast('已记录 ¥' + parseFloat(amt).toFixed(2) + ' · ' + selectedCat);
-      setTimeout(function () { location.href = 'index.html'; }, 900);
+      var amtStr = document.getElementById('amountInput').value;
+      var yuan = parseFloat(amtStr);
+      if (!amtStr || isNaN(yuan) || yuan <= 0) { toast('请输入有效金额'); return; }
+      if (!selectedCatId) { toast('请选择分类'); return; }
+
+      var body = {
+        type: currentType,
+        amount_cents: Math.round(yuan * 100),
+        category_id: selectedCatId,
+        account: document.getElementById('accountSelect').value,
+        note: document.getElementById('noteInput').value.trim() || null,
+        date: document.getElementById('dateInput').value || localToday()
+      };
+      fetch('/api/transactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res.error) { toast('保存失败：' + res.error); return; }
+          toast('已记录 ¥' + yuan.toFixed(2));
+          setTimeout(function () { location.href = 'bills.html'; }, 800);
+        })
+        .catch(function () { toast('保存失败（未连接到后端）'); });
     });
   </script>
 </body>
