@@ -1,0 +1,42 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": { "navigationBarTitleText": "每日记账" }
+    },
+    {
+      "path": "pages/bills/bills",
+      "style": { "navigationBarTitleText": "账单" }
+    },
+    {
+      "path": "pages/record/record",
+      "style": { "navigationBarTitleText": "记一笔" }
+    },
+    {
+      "path": "pages/stats/stats",
+      "style": { "navigationBarTitleText": "统计" }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": { "navigationBarTitleText": "我的" }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "每日记账",
+    "navigationBarBackgroundColor": "#FFF7F9",
+    "backgroundColor": "#FFF7F9"
+  },
+  "tabBar": {
+    "color": "#9B8A92",
+    "selectedColor": "#FF7BA9",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页" },
+      { "pagePath": "pages/bills/bills", "text": "账单" },
+      { "pagePath": "pages/stats/stats", "text": "统计" },
+      { "pagePath": "pages/profile/profile", "text": "我的" }
+    ]
+  }
+}
