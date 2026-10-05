@@ -1,6 +1,7 @@
 <template>
   <view class="page">
     <record-fab />
+
     <!-- 头部 -->
     <view class="head card">
       <view class="avatar">💰</view>
@@ -19,12 +20,13 @@
       </view>
     </view>
 
-    <!-- 关于 -->
     <view class="about">数据存储于本地 MySQL，金额以「元」精确存储</view>
   </view>
 </template>
 
 <script>
+import { getTransactions } from '../../utils/api'
+
 export default {
   data() {
     return {
@@ -39,11 +41,38 @@ export default {
   },
   methods: {
     onMenu(title) {
+      if (title === '分类管理') return uni.navigateTo({ url: '/pages/categories/categories' })
+      if (title === '预算管理') return uni.navigateTo({ url: '/pages/budget/budget' })
+      if (title === '回收站') return uni.navigateTo({ url: '/pages/recycle/recycle' })
+      if (title === '数据导出') return this.exportCsv()
       if (title === '关于') {
         uni.showModal({ title: '每日记账', content: '个人财务记账跨端应用（uni-app）\n安卓 / iOS / 微信小程序', showCancel: false })
-      } else {
-        uni.showToast({ title: title + '：功能开发中', icon: 'none' })
       }
+    },
+    exportCsv() {
+      uni.showLoading({ title: '导出中' })
+      getTransactions()
+        .then((txs) => {
+          uni.hideLoading()
+          if (!txs.length) { uni.showToast({ title: '暂无数据', icon: 'none' }); return }
+          let csv = '类型,分类,金额,账户,备注,日期\n'
+          txs.forEach((t) => {
+            const row = [
+              t.type === 'expense' ? '支出' : '收入',
+              t.category_name,
+              t.amount,
+              t.account,
+              (t.note || '').replace(/,/g, '，'),
+              t.date
+            ].join(',')
+            csv += row + '\n'
+          })
+          uni.setClipboardData({
+            data: csv,
+            success: () => uni.showToast({ title: '已复制 CSV（' + txs.length + ' 条）' })
+          })
+        })
+        .catch((e) => { uni.hideLoading(); uni.showToast({ title: e.message, icon: 'none' }) })
     }
   }
 }

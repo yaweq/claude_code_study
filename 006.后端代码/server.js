@@ -60,14 +60,14 @@ app.get('/api/categories', async (req, res) => {
 /* ---------- 交易列表（可按 type / month / category_id / limit 过滤） ---------- */
 app.get('/api/transactions', async (req, res) => {
   try {
-    const { type, month, category_id, limit } = req.query;
+    const { type, month, category_id, limit, deleted } = req.query;
     let sql = `
       SELECT t.id, t.type, t.amount, t.account, t.note, DATE_FORMAT(t.date, '%Y-%m-%d') AS date,
              c.id AS category_id, c.name AS category_name, c.icon AS category_icon
       FROM transactions t
       JOIN categories c ON t.category_id = c.id
-      WHERE t.deleted = 0`;
-    const p = [];
+      WHERE t.deleted = ?`;
+    const p = [deleted === '1' ? 1 : 0];
     if (type) { sql += ' AND t.type = ?'; p.push(type); }
     if (month) { sql += ' AND DATE_FORMAT(t.date, "%Y-%m") = ?'; p.push(month); }
     if (category_id) { sql += ' AND t.category_id = ?'; p.push(Number(category_id)); }
@@ -173,6 +173,91 @@ app.delete('/api/transactions/:id', async (req, res) => {
       [id]
     );
     if (r.affectedRows === 0) return res.status(404).json({ error: '记录不存在或已删除' });
+    res.json({ ok: true, id });
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 新增分类 ---------- */
+app.post('/api/categories', async (req, res) => {
+  try {
+    const { name, type, icon, sort } = req.body || {};
+    if (!name) return res.status(400).json({ error: 'name 必填' });
+    if (type !== 'expense' && type !== 'income') return res.status(400).json({ error: 'type 必须为 expense 或 income' });
+    const [r] = await pool.query(
+      'INSERT INTO categories (name, type, icon, sort) VALUES (?, ?, ?, ?)',
+      [name, type, icon || '📦', sort || 0]
+    );
+    res.status(201).json({ id: r.insertId, name, type, icon: icon || '📦', sort: sort || 0 });
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 修改分类 ---------- */
+app.put('/api/categories/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const { name, icon, sort } = req.body || {};
+    await pool.query('UPDATE categories SET name = ?, icon = ?, sort = ? WHERE id = ?', [name, icon, sort, id]);
+    res.json({ ok: true, id });
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 删除分类（可迁移账目；无迁移目标则软删除其账目） ---------- */
+app.delete('/api/categories/:id', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    const migrateTo = req.query.migrate_to ? Number(req.query.migrate_to) : null;
+    if (migrateTo) {
+      await pool.query('UPDATE transactions SET category_id = ? WHERE category_id = ?', [migrateTo, id]);
+    } else {
+      await pool.query('UPDATE transactions SET deleted = 1, deleted_at = NOW() WHERE category_id = ?', [id]);
+    }
+    await pool.query('DELETE FROM categories WHERE id = ?', [id]);
+    res.json({ ok: true, id });
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 预算列表（可按 month 过滤） ---------- */
+app.get('/api/budgets', async (req, res) => {
+  try {
+    const { month } = req.query;
+    let sql = 'SELECT b.id, b.category_id, b.month, b.amount, c.name AS category_name, c.icon AS category_icon FROM budgets b LEFT JOIN categories c ON b.category_id = c.id';
+    const p = [];
+    if (month) { sql += ' WHERE b.month = ?'; p.push(month); }
+    sql += ' ORDER BY (b.category_id IS NULL) DESC, b.category_id';
+    const [rows] = await pool.query(sql, p);
+    res.json(rows);
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 设置预算（upsert；amount 为 0 表示删除该预算） ---------- */
+app.put('/api/budgets', async (req, res) => {
+  try {
+    const { category_id, month, amount } = req.body || {};
+    if (!month) return res.status(400).json({ error: 'month 必填（YYYY-MM）' });
+    const cid = category_id ? Number(category_id) : null;
+    const amt = Number(amount) || 0;
+    await pool.query('DELETE FROM budgets WHERE category_id <=> ? AND month = ?', [cid, month]);
+    if (amt > 0) {
+      await pool.query('INSERT INTO budgets (category_id, month, amount) VALUES (?, ?, ?)', [cid, month, amt]);
+    }
+    res.json({ ok: true });
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 恢复交易（从回收站） ---------- */
+app.put('/api/transactions/:id/restore', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    await pool.query('UPDATE transactions SET deleted = 0, deleted_at = NULL WHERE id = ?', [id]);
+    res.json({ ok: true, id });
+  } catch (e) { fail(res, e); }
+});
+
+/* ---------- 彻底删除交易 ---------- */
+app.delete('/api/transactions/:id/purge', async (req, res) => {
+  try {
+    const id = Number(req.params.id);
+    await pool.query('DELETE FROM transactions WHERE id = ?', [id]);
     res.json({ ok: true, id });
   } catch (e) { fail(res, e); }
 });

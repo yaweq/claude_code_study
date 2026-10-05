@@ -47,3 +47,17 @@ export const getTrend = (months = 6) => request('/api/trend?months=' + months)
 export const addTransaction = (data) => request('/api/transactions', { method: 'POST', data })
 
 export const deleteTransaction = (id) => request('/api/transactions/' + id, { method: 'DELETE' })
+
+export const createCategory = (data) => request('/api/categories', { method: 'POST', data })
+
+export const updateCategory = (id, data) => request('/api/categories/' + id, { method: 'PUT', data })
+
+export const deleteCategory = (id, migrateTo) => request('/api/categories/' + id + (migrateTo ? '?migrate_to=' + migrateTo : ''), { method: 'DELETE' })
+
+export const getBudgets = (month) => request('/api/budgets' + (month ? '?month=' + month : ''))
+
+export const setBudget = (data) => request('/api/budgets', { method: 'PUT', data })
+
+export const restoreTransaction = (id) => request('/api/transactions/' + id + '/restore', { method: 'PUT' })
+
+export const purgeTransaction = (id) => request('/api/transactions/' + id + '/purge', { method: 'DELETE' })
