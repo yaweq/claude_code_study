@@ -62,7 +62,7 @@ app.get('/api/transactions', async (req, res) => {
   try {
     const { type, month, category_id, limit } = req.query;
     let sql = `
-      SELECT t.id, t.type, t.amount, t.account, t.note, t.date,
+      SELECT t.id, t.type, t.amount, t.account, t.note, DATE_FORMAT(t.date, '%Y-%m-%d') AS date,
              c.id AS category_id, c.name AS category_name, c.icon AS category_icon
       FROM transactions t
       JOIN categories c ON t.category_id = c.id
