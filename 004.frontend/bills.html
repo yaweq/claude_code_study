@@ -102,8 +102,8 @@
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
     }
     // 分 -> ¥字符串
-    function fmt(cents) {
-      var n = Math.abs(cents) / 100;
+    function fmt(amount) {
+      var n = Math.abs(amount);
       return '¥' + n.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     }
     function localToday() {
@@ -140,7 +140,7 @@
       Object.keys(groups).sort().reverse().forEach(function (date) {
         var items = groups[date];
         var exp = 0, inc = 0;
-        items.forEach(function (t) { if (t.type === 'expense') exp += t.amount_cents; else inc += t.amount_cents; });
+        items.forEach(function (t) { if (t.type === 'expense') exp += t.amount; else inc += t.amount; });
         var sumText = '';
         if (exp && inc) sumText = '支 ' + fmt(exp) + ' / 收 ' + fmt(inc);
         else if (exp) sumText = '支出 ' + fmt(exp);
@@ -156,7 +156,7 @@
             '<span class="txn-icon" style="background:' + bg + '">' + esc(t.category_icon || '📦') + '</span>' +
             '<span class="txn-main"><span class="txn-name">' + esc(name) + '</span>' +
             '<span class="txn-meta">' + esc(t.category_name) + '<span class="sep"></span>' + esc(t.account) + '</span></span>' +
-            '<span class="txn-amount ' + cls + '">' + sign + fmt(t.amount_cents) + '</span>' +
+            '<span class="txn-amount ' + cls + '">' + sign + fmt(t.amount) + '</span>' +
             '</div>';
         });
         html += '</div></section>';

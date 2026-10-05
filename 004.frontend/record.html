@@ -130,7 +130,7 @@
 
       var body = {
         type: currentType,
-        amount_cents: Math.round(yuan * 100),
+        amount: Math.round(yuan * 100) / 100,
         category_id: selectedCatId,
         account: document.getElementById('accountSelect').value,
         note: document.getElementById('noteInput').value.trim() || null,

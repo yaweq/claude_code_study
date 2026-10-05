@@ -45,7 +45,7 @@ npm start
 | GET | `/api/summary?month=YYYY-MM` | 月度收支汇总 {income, expense, balance} |
 | GET | `/api/breakdown?month=&type=expense` | 分类占比 |
 | GET | `/api/trend?months=6` | 近 N 个月收支趋势（补齐缺失月份） |
-| POST | `/api/transactions` | 新增交易（写库），body：type/amount_cents/category_id/account/note/date |
+| POST | `/api/transactions` | 新增交易（写库），body：type/amount/category_id/account/note/date |
 | DELETE | `/api/transactions/:id` | 软删除交易（进回收站） |
 
-金额字段统一为 `amount_cents`（单位「分」整数），前端展示时再转元。
+金额字段统一为 `amount`（单位「元」，DECIMAL(12,2)，精确到分），数据库与页面显示同值。

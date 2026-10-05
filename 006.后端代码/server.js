@@ -62,7 +62,7 @@ app.get('/api/transactions', async (req, res) => {
   try {
     const { type, month, category_id, limit } = req.query;
     let sql = `
-      SELECT t.id, t.type, t.amount_cents, t.account, t.note, t.date,
+      SELECT t.id, t.type, t.amount, t.account, t.note, t.date,
              c.id AS category_id, c.name AS category_name, c.icon AS category_icon
       FROM transactions t
       JOIN categories c ON t.category_id = c.id
@@ -85,8 +85,8 @@ app.get('/api/summary', async (req, res) => {
     if (!month) return res.status(400).json({ error: '缺少 month 参数（YYYY-MM）' });
     const [rows] = await pool.query(
       `SELECT
-         COALESCE(SUM(CASE WHEN type = 'income'  THEN amount_cents ELSE 0 END), 0) AS income,
-         COALESCE(SUM(CASE WHEN type = 'expense' THEN amount_cents ELSE 0 END), 0) AS expense
+         COALESCE(SUM(CASE WHEN type = 'income'  THEN amount ELSE 0 END), 0) AS income,
+         COALESCE(SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END), 0) AS expense
        FROM transactions
        WHERE deleted = 0 AND DATE_FORMAT(date, '%Y-%m') = ?`,
       [month]
@@ -103,12 +103,12 @@ app.get('/api/breakdown', async (req, res) => {
     if (!month) return res.status(400).json({ error: '缺少 month 参数（YYYY-MM）' });
     const t = type || 'expense';
     const [rows] = await pool.query(
-      `SELECT c.id AS category_id, c.name, c.icon, SUM(t.amount_cents) AS total_cents
+      `SELECT c.id AS category_id, c.name, c.icon, SUM(t.amount) AS total
        FROM transactions t
        JOIN categories c ON t.category_id = c.id
        WHERE t.deleted = 0 AND t.type = ? AND DATE_FORMAT(t.date, '%Y-%m') = ?
        GROUP BY c.id, c.name, c.icon
-       ORDER BY total_cents DESC`,
+       ORDER BY total DESC`,
       [t, month]
     );
     res.json(rows);
@@ -121,8 +121,8 @@ app.get('/api/trend', async (req, res) => {
     const n = Number(req.query.months || 6);
     const [rows] = await pool.query(
       `SELECT DATE_FORMAT(date, '%Y-%m') AS month,
-              COALESCE(SUM(CASE WHEN type = 'income'  THEN amount_cents ELSE 0 END), 0) AS income,
-              COALESCE(SUM(CASE WHEN type = 'expense' THEN amount_cents ELSE 0 END), 0) AS expense
+              COALESCE(SUM(CASE WHEN type = 'income'  THEN amount ELSE 0 END), 0) AS income,
+              COALESCE(SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END), 0) AS expense
        FROM transactions
        WHERE deleted = 0 AND date >= DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), INTERVAL ? MONTH)
        GROUP BY DATE_FORMAT(date, '%Y-%m')
@@ -144,23 +144,23 @@ app.get('/api/trend', async (req, res) => {
 /* ---------- 新增交易（写库） ---------- */
 app.post('/api/transactions', async (req, res) => {
   try {
-    const { type, amount_cents, category_id, account, note, date } = req.body || {};
+    const { type, amount, category_id, account, note, date } = req.body || {};
     if (type !== 'expense' && type !== 'income')
       return res.status(400).json({ error: 'type 必须为 expense 或 income' });
-    const amt = Number(amount_cents);
-    if (!Number.isInteger(amt) || amt <= 0)
-      return res.status(400).json({ error: 'amount_cents 必须为正整数（单位：分）' });
+    const amt = Number(amount);
+    if (!Number.isFinite(amt) || amt <= 0)
+      return res.status(400).json({ error: 'amount 必须为正数（单位：元）' });
     const cid = Number(category_id);
     if (!Number.isInteger(cid)) return res.status(400).json({ error: 'category_id 无效' });
     if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date))
       return res.status(400).json({ error: 'date 格式应为 YYYY-MM-DD' });
 
     const [r] = await pool.query(
-      `INSERT INTO transactions (type, amount_cents, category_id, account, note, date)
+      `INSERT INTO transactions (type, amount, category_id, account, note, date)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [type, amt, cid, account || '现金', note || null, date]
     );
-    res.status(201).json({ id: r.insertId, type, amount_cents: amt, category_id: cid, account: account || '现金', note: note || null, date });
+    res.status(201).json({ id: r.insertId, type, amount: amt, category_id: cid, account: account || '现金', note: note || null, date });
   } catch (e) { fail(res, e); }
 });
 

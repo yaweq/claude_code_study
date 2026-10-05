@@ -2,7 +2,7 @@
 -- 个人财务记账产品 · 数据库结构（MySQL 8/9）
 -- 依据：PRD 第 7 章「数据模型设计」+ 002.记账产品/js/store.js 实际字段
 -- 约定：
---   1) 金额一律以「分」整数存储（字段 *amount_cents*），避免浮点误差
+--   1) 金额以「元」DECIMAL(12,2) 存储（字段 *amount*），精确到分
 --   2) 表/列名用 snake_case；前端 JS 用 camelCase，集成时映射
 --   3) id 在 PRD 中为 string（前端概念），后端用 BIGINT 自增主键
 -- =============================================================
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS transactions (
   id           BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   type         ENUM('expense','income') NOT NULL COMMENT '收支类型',
-  amount_cents BIGINT          NOT NULL COMMENT '金额（分，正整数）',
+  amount       DECIMAL(12,2)   NOT NULL COMMENT '金额（元）',
   category_id  BIGINT UNSIGNED  NOT NULL COMMENT '关联分类 id',
   account      ENUM('现金','微信','支付宝','银行卡') NOT NULL DEFAULT '现金' COMMENT '账户',
   note         VARCHAR(100)    NULL COMMENT '备注（≤100 字）',
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS budgets (
   id           BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   category_id  BIGINT UNSIGNED NULL COMMENT '分类预算；NULL 表示总预算',
   month        CHAR(7)        NOT NULL COMMENT '月份 YYYY-MM',
-  amount_cents BIGINT         NOT NULL COMMENT '预算金额（分）',
+  amount       DECIMAL(12,2)  NOT NULL COMMENT '预算金额（元）',
   created_at   TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at   TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   UNIQUE KEY uk_budget (category_id, month),
